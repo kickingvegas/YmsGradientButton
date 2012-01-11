@@ -1,0 +1,445 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D9802CB814BD79E000D508D2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9802CB714BD79E000D508D2 /* UIKit.framework */; };
+		D9802CBA14BD79E000D508D2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9802CB914BD79E000D508D2 /* Foundation.framework */; };
+		D9802CBC14BD79E000D508D2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9802CBB14BD79E000D508D2 /* CoreGraphics.framework */; };
+		D9802CC214BD79E000D508D2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D9802CC014BD79E000D508D2 /* InfoPlist.strings */; };
+		D9802CC414BD79E000D508D2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D9802CC314BD79E000D508D2 /* main.m */; };
+		D9802CC814BD79E000D508D2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D9802CC714BD79E000D508D2 /* AppDelegate.m */; };
+		D9802CCB14BD79E000D508D2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9802CCA14BD79E000D508D2 /* ViewController.m */; };
+		D9802CCE14BD79E000D508D2 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9802CCC14BD79E000D508D2 /* ViewController.xib */; };
+		D9802CD614BD79E000D508D2 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9802CD514BD79E000D508D2 /* SenTestingKit.framework */; };
+		D9802CD714BD79E000D508D2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9802CB714BD79E000D508D2 /* UIKit.framework */; };
+		D9802CD814BD79E000D508D2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9802CB914BD79E000D508D2 /* Foundation.framework */; };
+		D9802CE014BD79E000D508D2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D9802CDE14BD79E000D508D2 /* InfoPlist.strings */; };
+		D9802CE314BD79E000D508D2 /* YmsGradientButtonDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D9802CE214BD79E000D508D2 /* YmsGradientButtonDemoTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D9802CD914BD79E000D508D2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D9802CAA14BD79DF00D508D2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D9802CB214BD79DF00D508D2;
+			remoteInfo = YmsGradientButtonDemo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		D9802CB314BD79DF00D508D2 /* YmsGradientButtonDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YmsGradientButtonDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D9802CB714BD79E000D508D2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		D9802CB914BD79E000D508D2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D9802CBB14BD79E000D508D2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		D9802CBF14BD79E000D508D2 /* YmsGradientButtonDemo-Info.plist */ = {isa = PBXFileReference; path = "YmsGradientButtonDemo-Info.plist"; sourceTree = "<group>"; };
+		D9802CC114BD79E000D508D2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D9802CC314BD79E000D508D2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D9802CC514BD79E000D508D2 /* YmsGradientButtonDemo-Prefix.pch */ = {isa = PBXFileReference; path = "YmsGradientButtonDemo-Prefix.pch"; sourceTree = "<group>"; };
+		D9802CC614BD79E000D508D2 /* AppDelegate.h */ = {isa = PBXFileReference; path = AppDelegate.h; sourceTree = "<group>"; };
+		D9802CC714BD79E000D508D2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		D9802CC914BD79E000D508D2 /* ViewController.h */ = {isa = PBXFileReference; path = ViewController.h; sourceTree = "<group>"; };
+		D9802CCA14BD79E000D508D2 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		D9802CCD14BD79E000D508D2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
+		D9802CD414BD79E000D508D2 /* YmsGradientButtonDemoTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YmsGradientButtonDemoTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D9802CD514BD79E000D508D2 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		D9802CDD14BD79E000D508D2 /* YmsGradientButtonDemoTests-Info.plist */ = {isa = PBXFileReference; path = "YmsGradientButtonDemoTests-Info.plist"; sourceTree = "<group>"; };
+		D9802CDF14BD79E000D508D2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D9802CE114BD79E000D508D2 /* YmsGradientButtonDemoTests.h */ = {isa = PBXFileReference; path = YmsGradientButtonDemoTests.h; sourceTree = "<group>"; };
+		D9802CE214BD79E000D508D2 /* YmsGradientButtonDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YmsGradientButtonDemoTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D9802CB014BD79DF00D508D2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D9802CB814BD79E000D508D2 /* UIKit.framework in Frameworks */,
+				D9802CBA14BD79E000D508D2 /* Foundation.framework in Frameworks */,
+				D9802CBC14BD79E000D508D2 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D9802CD014BD79E000D508D2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D9802CD614BD79E000D508D2 /* SenTestingKit.framework in Frameworks */,
+				D9802CD714BD79E000D508D2 /* UIKit.framework in Frameworks */,
+				D9802CD814BD79E000D508D2 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D9802CA814BD79DF00D508D2 = {
+			isa = PBXGroup;
+			children = (
+				D9802CBD14BD79E000D508D2 /* YmsGradientButtonDemo */,
+				D9802CDB14BD79E000D508D2 /* YmsGradientButtonDemoTests */,
+				D9802CB614BD79DF00D508D2 /* Frameworks */,
+				D9802CB414BD79DF00D508D2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D9802CB414BD79DF00D508D2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D9802CB314BD79DF00D508D2 /* YmsGradientButtonDemo.app */,
+				D9802CD414BD79E000D508D2 /* YmsGradientButtonDemoTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D9802CB614BD79DF00D508D2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D9802CB714BD79E000D508D2 /* UIKit.framework */,
+				D9802CB914BD79E000D508D2 /* Foundation.framework */,
+				D9802CBB14BD79E000D508D2 /* CoreGraphics.framework */,
+				D9802CD514BD79E000D508D2 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D9802CBD14BD79E000D508D2 /* YmsGradientButtonDemo */ = {
+			isa = PBXGroup;
+			children = (
+				D9802CC614BD79E000D508D2 /* AppDelegate.h */,
+				D9802CC714BD79E000D508D2 /* AppDelegate.m */,
+				D9802CC914BD79E000D508D2 /* ViewController.h */,
+				D9802CCA14BD79E000D508D2 /* ViewController.m */,
+				D9802CCC14BD79E000D508D2 /* ViewController.xib */,
+				D9802CBE14BD79E000D508D2 /* Supporting Files */,
+			);
+			path = YmsGradientButtonDemo;
+			sourceTree = "<group>";
+		};
+		D9802CBE14BD79E000D508D2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D9802CBF14BD79E000D508D2 /* YmsGradientButtonDemo-Info.plist */,
+				D9802CC014BD79E000D508D2 /* InfoPlist.strings */,
+				D9802CC314BD79E000D508D2 /* main.m */,
+				D9802CC514BD79E000D508D2 /* YmsGradientButtonDemo-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D9802CDB14BD79E000D508D2 /* YmsGradientButtonDemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				D9802CE114BD79E000D508D2 /* YmsGradientButtonDemoTests.h */,
+				D9802CE214BD79E000D508D2 /* YmsGradientButtonDemoTests.m */,
+				D9802CDC14BD79E000D508D2 /* Supporting Files */,
+			);
+			path = YmsGradientButtonDemoTests;
+			sourceTree = "<group>";
+		};
+		D9802CDC14BD79E000D508D2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D9802CDD14BD79E000D508D2 /* YmsGradientButtonDemoTests-Info.plist */,
+				D9802CDE14BD79E000D508D2 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D9802CB214BD79DF00D508D2 /* YmsGradientButtonDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D9802CE614BD79E000D508D2 /* Build configuration list for PBXNativeTarget "YmsGradientButtonDemo" */;
+			buildPhases = (
+				D9802CAF14BD79DF00D508D2 /* Sources */,
+				D9802CB014BD79DF00D508D2 /* Frameworks */,
+				D9802CB114BD79DF00D508D2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = YmsGradientButtonDemo;
+			productName = YmsGradientButtonDemo;
+			productReference = D9802CB314BD79DF00D508D2 /* YmsGradientButtonDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D9802CD314BD79E000D508D2 /* YmsGradientButtonDemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D9802CE914BD79E000D508D2 /* Build configuration list for PBXNativeTarget "YmsGradientButtonDemoTests" */;
+			buildPhases = (
+				D9802CCF14BD79E000D508D2 /* Sources */,
+				D9802CD014BD79E000D508D2 /* Frameworks */,
+				D9802CD114BD79E000D508D2 /* Resources */,
+				D9802CD214BD79E000D508D2 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D9802CDA14BD79E000D508D2 /* PBXTargetDependency */,
+			);
+			name = YmsGradientButtonDemoTests;
+			productName = YmsGradientButtonDemoTests;
+			productReference = D9802CD414BD79E000D508D2 /* YmsGradientButtonDemoTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D9802CAA14BD79DF00D508D2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = "Yummy Melon Software LLC";
+			};
+			buildConfigurationList = D9802CAD14BD79DF00D508D2 /* Build configuration list for PBXProject "YmsGradientButtonDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = D9802CA814BD79DF00D508D2;
+			productRefGroup = D9802CB414BD79DF00D508D2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D9802CB214BD79DF00D508D2 /* YmsGradientButtonDemo */,
+				D9802CD314BD79E000D508D2 /* YmsGradientButtonDemoTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D9802CB114BD79DF00D508D2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D9802CC214BD79E000D508D2 /* InfoPlist.strings in Resources */,
+				D9802CCE14BD79E000D508D2 /* ViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D9802CD114BD79E000D508D2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D9802CE014BD79E000D508D2 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D9802CD214BD79E000D508D2 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D9802CAF14BD79DF00D508D2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D9802CC414BD79E000D508D2 /* main.m in Sources */,
+				D9802CC814BD79E000D508D2 /* AppDelegate.m in Sources */,
+				D9802CCB14BD79E000D508D2 /* ViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D9802CCF14BD79E000D508D2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D9802CE314BD79E000D508D2 /* YmsGradientButtonDemoTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D9802CDA14BD79E000D508D2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D9802CB214BD79DF00D508D2 /* YmsGradientButtonDemo */;
+			targetProxy = D9802CD914BD79E000D508D2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D9802CC014BD79E000D508D2 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D9802CC114BD79E000D508D2 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		D9802CCC14BD79E000D508D2 /* ViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D9802CCD14BD79E000D508D2 /* en */,
+			);
+			name = ViewController.xib;
+			sourceTree = "<group>";
+		};
+		D9802CDE14BD79E000D508D2 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D9802CDF14BD79E000D508D2 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D9802CE414BD79E000D508D2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		D9802CE514BD79E000D508D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D9802CE714BD79E000D508D2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "YmsGradientButtonDemo/YmsGradientButtonDemo-Prefix.pch";
+				INFOPLIST_FILE = "YmsGradientButtonDemo/YmsGradientButtonDemo-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		D9802CE814BD79E000D508D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "YmsGradientButtonDemo/YmsGradientButtonDemo-Prefix.pch";
+				INFOPLIST_FILE = "YmsGradientButtonDemo/YmsGradientButtonDemo-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		D9802CEA14BD79E000D508D2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/YmsGradientButtonDemo.app/YmsGradientButtonDemo";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "YmsGradientButtonDemo/YmsGradientButtonDemo-Prefix.pch";
+				INFOPLIST_FILE = "YmsGradientButtonDemoTests/YmsGradientButtonDemoTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		D9802CEB14BD79E000D508D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/YmsGradientButtonDemo.app/YmsGradientButtonDemo";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "YmsGradientButtonDemo/YmsGradientButtonDemo-Prefix.pch";
+				INFOPLIST_FILE = "YmsGradientButtonDemoTests/YmsGradientButtonDemoTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D9802CAD14BD79DF00D508D2 /* Build configuration list for PBXProject "YmsGradientButtonDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D9802CE414BD79E000D508D2 /* Debug */,
+				D9802CE514BD79E000D508D2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D9802CE614BD79E000D508D2 /* Build configuration list for PBXNativeTarget "YmsGradientButtonDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D9802CE714BD79E000D508D2 /* Debug */,
+				D9802CE814BD79E000D508D2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		D9802CE914BD79E000D508D2 /* Build configuration list for PBXNativeTarget "YmsGradientButtonDemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D9802CEA14BD79E000D508D2 /* Debug */,
+				D9802CEB14BD79E000D508D2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D9802CAA14BD79DF00D508D2 /* Project object */;
+}
