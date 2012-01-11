@@ -32,7 +32,7 @@
 - (void)renderGradients {
     
     if (self.resourceName == nil) {
-        self.resourceName = @"YmsGradientButton";
+        self.resourceName = NSStringFromClass([self class]);
     }
     
     NSString *path = [[NSBundle mainBundle] pathForResource:self.resourceName ofType:@"plist"];
