@@ -25,7 +25,6 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    
     [self renderGradients];
 }
 
@@ -63,23 +62,22 @@
     UIGraphicsBeginImageContext(self.bounds.size);
     CGContextRef context = UIGraphicsGetCurrentContext();
 	
-	CAGradientLayer *gradientLayer = [self configureGradientForState:aState withConfig:buttonConfig];
-	[gradientLayer renderInContext:context];
+    CAGradientLayer *gradientLayer = [self configureGradientForState:aState withConfig:buttonConfig];
+    [gradientLayer renderInContext:context];
     
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
 	
-	[self setBackgroundImage:image forState:aState];
+    [self setBackgroundImage:image forState:aState];
 }
 
 
 - (CAGradientLayer *)configureGradientForState:(UIControlState)aState withConfig:(NSDictionary *)buttonConfig {
-    
-	CAGradientLayer *gradientLayer = [[CAGradientLayer alloc] init];
+    CAGradientLayer *gradientLayer = [[CAGradientLayer alloc] init];
 	
     [gradientLayer setBounds:[self bounds]];
-	[gradientLayer setPosition:CGPointMake([self bounds].size.width/2,
-										   [self bounds].size.height/2)];
+    [gradientLayer setPosition:CGPointMake([self bounds].size.width/2,
+                                           [self bounds].size.height/2)];
     
     NSString *stateName;
     
@@ -87,13 +85,13 @@
         stateName = @"normal";
     }
 	
-	else if (aState == UIControlStateHighlighted) {
+    else if (aState == UIControlStateHighlighted) {
         stateName = @"highlighted";
-	}
+    }
 	
-	else if (aState == UIControlStateDisabled) {
+    else if (aState == UIControlStateDisabled) {
         stateName = @"disabled";
-	}
+    }
     
     NSArray *colorArray = (NSArray *)[(NSDictionary *)[buttonConfig objectForKey:stateName] objectForKey:@"colors"];
     NSArray *locations = (NSArray *)[(NSDictionary *)[buttonConfig objectForKey:stateName] objectForKey:@"locations"];
@@ -123,7 +121,7 @@
     gradientLayer.borderColor = [RGBCSS(borderColorValue) CGColor];
     gradientLayer.borderWidth = [borderWidth floatValue];
     
-	return gradientLayer;
+    return gradientLayer;
 }
 
 
