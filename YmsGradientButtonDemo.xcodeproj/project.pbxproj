@@ -20,6 +20,9 @@
 		D9802CD814BD79E000D508D2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9802CB914BD79E000D508D2 /* Foundation.framework */; };
 		D9802CE014BD79E000D508D2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D9802CDE14BD79E000D508D2 /* InfoPlist.strings */; };
 		D9802CE314BD79E000D508D2 /* YmsGradientButtonDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D9802CE214BD79E000D508D2 /* YmsGradientButtonDemoTests.m */; };
+		D9802CEE14BD7A3B00D508D2 /* YmsGradientButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D9802CED14BD7A3B00D508D2 /* YmsGradientButton.m */; };
+		D9802CF014BD7A5100D508D2 /* YmsGradientButton.plist in Resources */ = {isa = PBXBuildFile; fileRef = D9802CEF14BD7A5100D508D2 /* YmsGradientButton.plist */; };
+		D9802CF314BD7ACD00D508D2 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9802CF214BD7ACD00D508D2 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,21 +40,26 @@
 		D9802CB714BD79E000D508D2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D9802CB914BD79E000D508D2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D9802CBB14BD79E000D508D2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		D9802CBF14BD79E000D508D2 /* YmsGradientButtonDemo-Info.plist */ = {isa = PBXFileReference; path = "YmsGradientButtonDemo-Info.plist"; sourceTree = "<group>"; };
+		D9802CBF14BD79E000D508D2 /* YmsGradientButtonDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "YmsGradientButtonDemo-Info.plist"; sourceTree = "<group>"; };
 		D9802CC114BD79E000D508D2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D9802CC314BD79E000D508D2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		D9802CC514BD79E000D508D2 /* YmsGradientButtonDemo-Prefix.pch */ = {isa = PBXFileReference; path = "YmsGradientButtonDemo-Prefix.pch"; sourceTree = "<group>"; };
-		D9802CC614BD79E000D508D2 /* AppDelegate.h */ = {isa = PBXFileReference; path = AppDelegate.h; sourceTree = "<group>"; };
+		D9802CC514BD79E000D508D2 /* YmsGradientButtonDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YmsGradientButtonDemo-Prefix.pch"; sourceTree = "<group>"; };
+		D9802CC614BD79E000D508D2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D9802CC714BD79E000D508D2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		D9802CC914BD79E000D508D2 /* ViewController.h */ = {isa = PBXFileReference; path = ViewController.h; sourceTree = "<group>"; };
+		D9802CC914BD79E000D508D2 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		D9802CCA14BD79E000D508D2 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		D9802CCD14BD79E000D508D2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
 		D9802CD414BD79E000D508D2 /* YmsGradientButtonDemoTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YmsGradientButtonDemoTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9802CD514BD79E000D508D2 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		D9802CDD14BD79E000D508D2 /* YmsGradientButtonDemoTests-Info.plist */ = {isa = PBXFileReference; path = "YmsGradientButtonDemoTests-Info.plist"; sourceTree = "<group>"; };
+		D9802CDD14BD79E000D508D2 /* YmsGradientButtonDemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "YmsGradientButtonDemoTests-Info.plist"; sourceTree = "<group>"; };
 		D9802CDF14BD79E000D508D2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		D9802CE114BD79E000D508D2 /* YmsGradientButtonDemoTests.h */ = {isa = PBXFileReference; path = YmsGradientButtonDemoTests.h; sourceTree = "<group>"; };
+		D9802CE114BD79E000D508D2 /* YmsGradientButtonDemoTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YmsGradientButtonDemoTests.h; sourceTree = "<group>"; };
 		D9802CE214BD79E000D508D2 /* YmsGradientButtonDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YmsGradientButtonDemoTests.m; sourceTree = "<group>"; };
+		D9802CEC14BD7A3B00D508D2 /* YmsGradientButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YmsGradientButton.h; sourceTree = "<group>"; };
+		D9802CED14BD7A3B00D508D2 /* YmsGradientButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YmsGradientButton.m; sourceTree = "<group>"; };
+		D9802CEF14BD7A5100D508D2 /* YmsGradientButton.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = YmsGradientButton.plist; sourceTree = "<group>"; };
+		D9802CF114BD7AAC00D508D2 /* YmsStyleSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YmsStyleSheet.h; sourceTree = "<group>"; };
+		D9802CF214BD7ACD00D508D2 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9802CF314BD7ACD00D508D2 /* QuartzCore.framework in Frameworks */,
 				D9802CB814BD79E000D508D2 /* UIKit.framework in Frameworks */,
 				D9802CBA14BD79E000D508D2 /* Foundation.framework in Frameworks */,
 				D9802CBC14BD79E000D508D2 /* CoreGraphics.framework in Frameworks */,
@@ -100,6 +109,7 @@
 		D9802CB614BD79DF00D508D2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D9802CF214BD7ACD00D508D2 /* QuartzCore.framework */,
 				D9802CB714BD79E000D508D2 /* UIKit.framework */,
 				D9802CB914BD79E000D508D2 /* Foundation.framework */,
 				D9802CBB14BD79E000D508D2 /* CoreGraphics.framework */,
@@ -115,6 +125,10 @@
 				D9802CC714BD79E000D508D2 /* AppDelegate.m */,
 				D9802CC914BD79E000D508D2 /* ViewController.h */,
 				D9802CCA14BD79E000D508D2 /* ViewController.m */,
+				D9802CF114BD7AAC00D508D2 /* YmsStyleSheet.h */,
+				D9802CEC14BD7A3B00D508D2 /* YmsGradientButton.h */,
+				D9802CED14BD7A3B00D508D2 /* YmsGradientButton.m */,
+				D9802CEF14BD7A5100D508D2 /* YmsGradientButton.plist */,
 				D9802CCC14BD79E000D508D2 /* ViewController.xib */,
 				D9802CBE14BD79E000D508D2 /* Supporting Files */,
 			);
@@ -224,6 +238,7 @@
 			files = (
 				D9802CC214BD79E000D508D2 /* InfoPlist.strings in Resources */,
 				D9802CCE14BD79E000D508D2 /* ViewController.xib in Resources */,
+				D9802CF014BD7A5100D508D2 /* YmsGradientButton.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +276,7 @@
 				D9802CC414BD79E000D508D2 /* main.m in Sources */,
 				D9802CC814BD79E000D508D2 /* AppDelegate.m in Sources */,
 				D9802CCB14BD79E000D508D2 /* ViewController.m in Sources */,
+				D9802CEE14BD7A3B00D508D2 /* YmsGradientButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
