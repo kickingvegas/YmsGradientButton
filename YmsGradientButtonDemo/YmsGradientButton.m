@@ -22,13 +22,19 @@
 @implementation YmsGradientButton
 @synthesize resourceName;
 
+
 - (void)awakeFromNib {
     [super awakeFromNib];
-	
+    
+    [self renderGradients];
+}
+
+- (void)renderGradients {
+    
     if (self.resourceName == nil) {
         self.resourceName = @"YmsGradientButton";
     }
-
+    
     NSString *path = [[NSBundle mainBundle] pathForResource:self.resourceName ofType:@"plist"];
     NSMutableDictionary *buttonConfig = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
     
@@ -45,7 +51,6 @@
                     format:@"Please revise the file %@.plist to confirm that it has legal values.", self.resourceName];
     }
 }
-
 
 - (BOOL)validateConfiguration:(NSDictionary *)buttonConfig {
     BOOL result = YES;
