@@ -34,6 +34,6 @@
 
 - (BOOL)validateConfiguration:(NSDictionary *)buttonConfig;
 
-
+- (void)renderGradients;
 
 @end
