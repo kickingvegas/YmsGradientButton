@@ -31,4 +31,6 @@ QUICKSTART:
   filename prefix of a plist that follows the schema of YmsGradientButton.plist.
 
   
+KNOWN ISSUES:
+* plist files require documentation
 
