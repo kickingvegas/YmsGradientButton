@@ -52,6 +52,13 @@
     }
 }
 
+
+- (void)renderGradientsWithResourceName:(NSString *)name {
+    self.resourceName = name;
+    [self renderGradients];
+}
+
+
 - (BOOL)validateConfiguration:(NSDictionary *)buttonConfig {
     BOOL result = YES;
     

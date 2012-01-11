@@ -36,4 +36,7 @@
 
 - (void)renderGradients;
 
+- (void)renderGradientsWithResourceName:(NSString *)name;
+
+
 @end
