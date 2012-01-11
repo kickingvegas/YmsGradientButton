@@ -1,1 +1,5 @@
-Hello, this is a readme file.
+YmsGradientButton
+
+iOS UIButton subclass featuring plist configured bitmap-free gradients.
+
+
