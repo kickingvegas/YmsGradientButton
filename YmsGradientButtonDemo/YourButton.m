@@ -19,14 +19,4 @@
 #import "YourButton.h"
 
 @implementation YourButton
-
-- (void)awakeFromNib {
-    // Set resourceName to the filename prefix of the plist configuration 
-    // file you wish to use for this button.
-    // In this case the file YourButton.plist will be used.
-    self.resourceName = @"YourButton";
-
-    [super awakeFromNib];
-}
-
 @end
