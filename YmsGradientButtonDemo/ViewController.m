@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "YmsGradientButton.h"
 
 @implementation ViewController
 
@@ -22,6 +23,14 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    YmsGradientButton *button = [YmsGradientButton buttonWithType:UIButtonTypeCustom];
+    button.titleLabel.font = [UIFont boldSystemFontOfSize:15.0f];
+    [button setTitle:@"YmsGradientButton Programmed" forState:UIControlStateNormal];
+    button.frame = CGRectMake(20, 193, 280, 37);
+    [button renderGradients];
+    [self.view addSubview:button];
+
 }
 
 - (void)viewDidUnload
