@@ -36,6 +36,13 @@
     }
     
     NSString *path = [[NSBundle mainBundle] pathForResource:self.resourceName ofType:@"plist"];
+    
+    if (path == nil) {
+        NSLog(@"WARNING: resource %@.plist does not exist. Using default resource YmsGradientButton.plist.", self.resourceName);
+        self.resourceName = @"YmsGradientButton";
+        path = [[NSBundle mainBundle] pathForResource:self.resourceName ofType:@"plist"];
+    }
+    
     NSMutableDictionary *buttonConfig = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
     
     if ([self validateConfiguration:buttonConfig]) {
@@ -185,75 +192,6 @@
     free(components);
 }
 
-
-/*  Approach using CAGradientLayer
- 
- - (void)gradientImplementationForState:(UIControlState)aState 
- withConfig:(NSDictionary *)buttonConfig 
- forContext:(CGContextRef)context {
- 
- CAGradientLayer *gradientLayer = [self configureGradientForState:aState withConfig:buttonConfig];
- [gradientLayer renderInContext:context];
- 
- }
-
-
-
-
-- (CAGradientLayer *)configureGradientForState:(UIControlState)aState withConfig:(NSDictionary *)buttonConfig {
-    CAGradientLayer *gradientLayer = [[CAGradientLayer alloc] init];
-	
-    [gradientLayer setBounds:[self bounds]];
-    [gradientLayer setPosition:CGPointMake([self bounds].size.width/2,
-                                           [self bounds].size.height/2)];
-    
-    NSString *stateName;
-    
-    if (aState == UIControlStateNormal) {
-        stateName = @"normal";
-    }
-	
-    else if (aState == UIControlStateHighlighted) {
-        stateName = @"highlighted";
-    }
-	
-    else if (aState == UIControlStateDisabled) {
-        stateName = @"disabled";
-    }
-    
-    NSArray *colorArray = (NSArray *)[(NSDictionary *)[buttonConfig objectForKey:stateName] objectForKey:@"colors"];
-    NSArray *locations = (NSArray *)[(NSDictionary *)[buttonConfig objectForKey:stateName] objectForKey:@"locations"];
-    
-    NSNumber *textColor = (NSNumber *)[(NSDictionary *)[buttonConfig objectForKey:stateName] objectForKey:@"textColor"];
-    NSNumber *cornerRadius = (NSNumber *)[(NSDictionary *)[buttonConfig objectForKey:stateName] objectForKey:@"cornerRadius"];
-    NSNumber *borderColor = (NSNumber *)[(NSDictionary *)[buttonConfig objectForKey:stateName] objectForKey:@"borderColor"];
-    int borderColorValue = [borderColor integerValue];
-    NSNumber *borderWidth = (NSNumber *)[(NSDictionary *)[buttonConfig objectForKey:stateName] objectForKey:@"borderWidth"];
-    
-    NSMutableArray *colors = [[NSMutableArray alloc] init];
-    
-    for (NSNumber *num in colorArray) {
-        int n = [num integerValue];
-        [colors addObject:(id)[RGBCSS(n) CGColor]];
-    }
-    
-    [gradientLayer setColors:colors];
-    
-    if ([locations count] > 0)
-        [gradientLayer setLocations:locations];
-    
-    int n = [textColor integerValue];
-    [self setTitleColor:RGBCSS(n) forState:aState];
-    gradientLayer.cornerRadius = [cornerRadius integerValue];
-    gradientLayer.masksToBounds = YES;
-    gradientLayer.borderColor = [RGBCSS(borderColorValue) CGColor];
-    gradientLayer.borderWidth = [borderWidth floatValue];
-    
-    return gradientLayer;
-}
-
-
- */
 
 
 
