@@ -29,6 +29,7 @@
 }
 
 - (void)renderGradients {
+    self.layer.masksToBounds = NO;
     
     if (self.resourceName == nil) {
         self.resourceName = NSStringFromClass([self class]);
@@ -61,15 +62,142 @@
 - (void)genGradientForState:(UIControlState)aState withConfig:(NSDictionary *)buttonConfig {
     UIGraphicsBeginImageContext(self.bounds.size);
     CGContextRef context = UIGraphicsGetCurrentContext();
-	
-    CAGradientLayer *gradientLayer = [self configureGradientForState:aState withConfig:buttonConfig];
-    [gradientLayer renderInContext:context];
+    
+    [self gradientImplementationForState:aState withConfig:buttonConfig forContext:context];
     
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
 	
     [self setBackgroundImage:image forState:aState];
 }
+
+
+
+- (void)gradientImplementationForState:(UIControlState)aState 
+                            withConfig:(NSDictionary *)buttonConfig 
+                            forContext:(CGContextRef)context {
+    
+    /*
+     * This method can be overridden if you want to implement your own gradient styling, 
+     * provided you maintain compliance with the plist specification.
+     */
+    
+    NSString *stateName;
+    
+    if (aState == UIControlStateNormal) {
+        stateName = @"normal";
+    }
+	
+    else if (aState == UIControlStateHighlighted) {
+        stateName = @"highlighted";
+    }
+	
+    else if (aState == UIControlStateDisabled) {
+        stateName = @"disabled";
+    }
+    
+    NSArray *colorArray = (NSArray *)[(NSDictionary *)[buttonConfig objectForKey:stateName] objectForKey:@"colors"];
+    NSArray *locationsArray = (NSArray *)[(NSDictionary *)[buttonConfig objectForKey:stateName] objectForKey:@"locations"];
+    NSArray *startPointArray = (NSArray *)[(NSDictionary *)[buttonConfig objectForKey:stateName] objectForKey:@"startPoint"];
+    NSArray *endPointArray = (NSArray *)[(NSDictionary *)[buttonConfig objectForKey:stateName] objectForKey:@"endPoint"];
+
+    NSNumber *textColor = (NSNumber *)[(NSDictionary *)[buttonConfig objectForKey:stateName] objectForKey:@"textColor"];
+    NSNumber *cornerRadius = (NSNumber *)[(NSDictionary *)[buttonConfig objectForKey:stateName] objectForKey:@"cornerRadius"];
+    NSNumber *borderColor = (NSNumber *)[(NSDictionary *)[buttonConfig objectForKey:stateName] objectForKey:@"borderColor"];
+    NSNumber *borderWidth = (NSNumber *)[(NSDictionary *)[buttonConfig objectForKey:stateName] objectForKey:@"borderWidth"];
+
+    // Configure Text Color
+    int textColorValue = [textColor integerValue];
+    [self setTitleColor:RGBCSS(textColorValue) forState:aState];
+
+    float cornerRadiusValue = [cornerRadius floatValue];
+    int borderColorValue = [borderColor integerValue];
+    float borderWidthValue = [borderWidth floatValue];
+    
+
+    // Render path and set clipping region
+    UIBezierPath *bPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(cornerRadiusValue, 
+                                                                             cornerRadiusValue, 
+                                                                             self.bounds.size.width - (cornerRadiusValue * 2), 
+                                                                             self.bounds.size.height - (cornerRadiusValue * 2))
+                                                     cornerRadius:cornerRadiusValue];
+    
+    [RGBCSS(borderColorValue) setStroke];
+    [[UIColor clearColor] setFill];
+    bPath.lineWidth = borderWidthValue;
+    [bPath fill];
+    [bPath stroke];
+    
+    CGContextAddPath(context, bPath.CGPath);
+    CGContextClip(context);
+    
+    // Render Gradient
+    CGGradientRef stateGradient;
+    CGColorSpaceRef rgbColorspace;
+    
+    CGFloat *locations = malloc(sizeof(CGFloat) * locationsArray.count);
+    
+    for (int i = 0; i < locationsArray.count; i++) {
+        NSNumber *e = (NSNumber *)[locationsArray objectAtIndex:i];
+        
+        CGFloat val = [e floatValue];
+        
+        locations[i] = val;
+    }
+    
+    size_t numLocations = locationsArray.count;
+    
+    CGFloat *components = malloc(sizeof(CGFloat) * colorArray.count * 4);
+
+    for (int i=0;  i < colorArray.count; i++) {
+        NSNumber *e = (NSNumber *)[colorArray objectAtIndex:i];
+        int rgb = [e integerValue];
+        
+        double r = (rgb >> 16 & 0xFF)/255.0;
+        double g = (rgb >> 8 & 0xFF)/255.0;
+        double b = (rgb & 0xFF)/255.0;
+        
+        components[i * 4] = r;
+        components[(i * 4) + 1] = g;
+        components[(i * 4) + 2] = b;
+        components[(i * 4) + 3] = 1.0;
+    }
+
+
+    rgbColorspace = CGColorSpaceCreateDeviceRGB();
+    stateGradient = CGGradientCreateWithColorComponents(rgbColorspace, components, locations, numLocations);
+    
+    CGRect currentBounds = self.bounds;
+    
+    float startPointNormalizeX = [(NSNumber *)[startPointArray objectAtIndex:0] floatValue];
+    float startPointNormalizeY = [(NSNumber *)[startPointArray objectAtIndex:1] floatValue];
+    float endPointNormalizeX = [(NSNumber *)[endPointArray objectAtIndex:0] floatValue];
+    float endPointNormalizeY = [(NSNumber *)[endPointArray objectAtIndex:1] floatValue];
+    
+    CGPoint startPoint = CGPointMake(CGRectGetMaxX(currentBounds) * startPointNormalizeX, CGRectGetMaxY(currentBounds) * startPointNormalizeY);
+    CGPoint endPoint = CGPointMake(CGRectGetMaxX(currentBounds) * endPointNormalizeX, CGRectGetMaxY(currentBounds) * endPointNormalizeY);
+    CGContextDrawLinearGradient(context, stateGradient, startPoint, endPoint, 0);
+    
+    CGGradientRelease(stateGradient);
+    CGColorSpaceRelease(rgbColorspace); 
+
+    free(locations);
+    free(components);
+}
+
+
+/*  Approach using CAGradientLayer
+ 
+ - (void)gradientImplementationForState:(UIControlState)aState 
+ withConfig:(NSDictionary *)buttonConfig 
+ forContext:(CGContextRef)context {
+ 
+ CAGradientLayer *gradientLayer = [self configureGradientForState:aState withConfig:buttonConfig];
+ [gradientLayer renderInContext:context];
+ 
+ }
+
+
 
 
 - (CAGradientLayer *)configureGradientForState:(UIControlState)aState withConfig:(NSDictionary *)buttonConfig {
@@ -125,6 +253,8 @@
 }
 
 
+ */
+
 
 
 - (BOOL)validateConfiguration:(NSDictionary *)buttonConfig {
@@ -135,6 +265,8 @@
     for (NSString *stateName in states) {
         NSArray *colorArray = (NSArray *)[(NSDictionary *)[buttonConfig objectForKey:stateName] objectForKey:@"colors"];
         NSArray *locations = (NSArray *)[(NSDictionary *)[buttonConfig objectForKey:stateName] objectForKey:@"locations"];
+        NSArray *startPoint = (NSArray *)[(NSDictionary *)[buttonConfig objectForKey:stateName] objectForKey:@"startPoint"];
+        NSArray *endPoint = (NSArray *)[(NSDictionary *)[buttonConfig objectForKey:stateName] objectForKey:@"endPoint"];
         
         NSNumber *textColor = (NSNumber *)[(NSDictionary *)[buttonConfig objectForKey:stateName] objectForKey:@"textColor"];
         NSNumber *cornerRadius = (NSNumber *)[(NSDictionary *)[buttonConfig objectForKey:stateName] objectForKey:@"cornerRadius"];
@@ -156,6 +288,28 @@
                           "They should either be equal or there should be no elements in the locations array.", stateName, self.resourceName);
                     result = result | NO;
                 }
+            }
+        }
+        
+        if (startPoint == nil) {
+            NSLog(@"ERROR: startPoint is not defined in the %@ section of %@.plist", stateName, self.resourceName);
+            result = result | NO;
+        }
+        else {
+            if (startPoint.count != 2) {
+                NSLog(@"ERROR: startPoint must have 2 elements (default 0.5, 0.0) in the %@ section of %@.plist", stateName, self.resourceName);
+                result = result | NO;
+            }
+        }
+        
+        if (endPoint == nil) {
+            NSLog(@"ERROR: endPoint is not defined in the %@ section of %@.plist", stateName, self.resourceName);
+            result = result | NO;
+        } 
+        else {
+            if (endPoint.count != 2) {
+                NSLog(@"ERROR: endPoint must have 2 elements (default 0.5, 1.0) in the %@ section of %@.plist", stateName, self.resourceName);
+                result = result | NO;
             }
         }
         

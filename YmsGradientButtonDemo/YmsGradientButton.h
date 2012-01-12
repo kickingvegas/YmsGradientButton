@@ -28,8 +28,6 @@
 
 - (void)genGradientForState:(UIControlState)aState withConfig:(NSDictionary *)buttonConfig;
 
-- (CAGradientLayer *)configureGradientForState:(UIControlState)aState withConfig:(NSDictionary *)buttonConfig;
-
 - (void)configureShadow:(NSDictionary *)buttonConfig;
 
 - (BOOL)validateConfiguration:(NSDictionary *)buttonConfig;
@@ -38,5 +36,15 @@
 
 - (void)renderGradientsWithResourceName:(NSString *)name;
 
+/*
+ * This method can be overridden if you want to implement your own gradient styling, 
+ * provided you maintain compliance with the plist specification.
+ */
+
+- (void)gradientImplementationForState:(UIControlState)aState 
+                            withConfig:(NSDictionary *)buttonConfig 
+                            forContext:(CGContextRef)context;
+
+//- (CAGradientLayer *)configureGradientForState:(UIControlState)aState withConfig:(NSDictionary *)buttonConfig;
 
 @end
