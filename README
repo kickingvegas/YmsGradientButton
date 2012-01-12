@@ -31,4 +31,7 @@ QUICKSTART:
   create your own custom button.
 * YmsGradientButton can also be instantiated programmatically.
 
+NOTES:
+* This code is written using ARC. 
+
 Please read the project wiki on GitHub for more information.
