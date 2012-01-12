@@ -31,7 +31,4 @@ QUICKSTART:
   create your own custom button.
 * YmsGradientButton can also be instantiated programmatically.
 
-  
-KNOWN ISSUES:
-* plist files require documentation
-
+Please read the project wiki on GitHub for more information.
