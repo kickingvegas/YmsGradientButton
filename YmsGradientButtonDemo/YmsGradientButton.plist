@@ -19,18 +19,24 @@
 		</array>
 		<key>locations</key>
 		<array>
-			<string>0.02</string>
-			<string>0.3</string>
+			<string>0.0</string>
+			<string>1.0</string>
 		</array>
 		<key>startPoint</key>
-		<array/>
+		<array>
+			<real>0.5</real>
+			<integer>0</integer>
+		</array>
 		<key>endPoint</key>
-		<array/>
+		<array>
+			<real>0.5</real>
+			<real>1</real>
+		</array>
 	</dict>
 	<key>highlighted</key>
 	<dict>
 		<key>borderWidth</key>
-		<integer>1</integer>
+		<integer>0</integer>
 		<key>cornerRadius</key>
 		<integer>3</integer>
 		<key>borderColor</key>
@@ -48,9 +54,15 @@
 			<real>0.5</real>
 		</array>
 		<key>startPoint</key>
-		<array/>
+		<array>
+			<real>0.5</real>
+			<integer>0</integer>
+		</array>
 		<key>endPoint</key>
-		<array/>
+		<array>
+			<real>0.5</real>
+			<real>1</real>
+		</array>
 	</dict>
 	<key>disabled</key>
 	<dict>
@@ -73,9 +85,15 @@
 			<real>0.3</real>
 		</array>
 		<key>startPoint</key>
-		<array/>
+		<array>
+			<real>0.5</real>
+			<integer>0</integer>
+		</array>
 		<key>endPoint</key>
-		<array/>
+		<array>
+			<real>0.5</real>
+			<real>1</real>
+		</array>
 	</dict>
 	<key>shadow</key>
 	<dict>
