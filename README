@@ -20,7 +20,8 @@ iOS UIButton subclass featuring plist configured bitmap-free gradients.
 
 QUICKSTART: 
 
-* Copy YmsGradientButton.[hm], YmsStyleSheet.h and YmsGradientButton.plist to your project.
+* Copy YmsGradientButton.[hm], YmsStyleSheet.h and YmsGradientButton.plist to 
+  your project.
 * Add the QuartzCore.framework to your project.
 * Instantiate a UIButton in Interface Builder. With the identity inspector, 
   set the custom class to YmsGradientButton.
