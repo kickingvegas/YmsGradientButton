@@ -19,4 +19,25 @@
 #import "YourButton.h"
 
 @implementation YourButton
+
+
+// This is an example of adding custom graphics over the gradient.
+- (void)addGraphicsForState:(UIControlState)aState forContext:(CGContextRef)context withOffset:(CGFloat)offset {
+    // Recalculate bounds based on offset
+    CGFloat maxX = self.bounds.size.width - (2 * offset);
+    CGFloat maxY = self.bounds.size.height - (2 * offset);
+    // Translate to set 0,0 to offset
+    CGContextTranslateCTM(context, offset, offset);
+    
+    // Draw an oval
+    UIBezierPath *bPath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 0, maxX, maxY)];
+    
+    [[UIColor brownColor] setStroke];
+    [[UIColor colorWithRed:0.5 green:0.7 blue:0.5 alpha:0.5] setFill];
+    bPath.lineWidth = 2;
+    [bPath fill];
+    [bPath stroke];
+}
+
+
 @end
