@@ -28,8 +28,8 @@ QUICKSTART:
 * Configure the gradients of the button for the different UIControlStates 
   normal, highlighted, and disabled in the file YmsGradientButton.plist.
   The settings map to the properties defined in CAGradientLayer.
-* You can subclass YmsGradientButton and create plist with the subclass name to
-  create your own custom button.
+* You can subclass YmsGradientButton and create a plist with the subclass
+  name to create your own custom button.
 * YmsGradientButton can also be instantiated programmatically.
 
 NOTES:
