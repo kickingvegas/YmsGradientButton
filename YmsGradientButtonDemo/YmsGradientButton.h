@@ -45,6 +45,10 @@
                             withConfig:(NSDictionary *)buttonConfig 
                             forContext:(CGContextRef)context;
 
-//- (CAGradientLayer *)configureGradientForState:(UIControlState)aState withConfig:(NSDictionary *)buttonConfig;
+
+- (void)addGraphicsForState:(UIControlState)aState 
+                 forContext:(CGContextRef)context
+                 withOffset:(CGFloat)offset;
+
 
 @end

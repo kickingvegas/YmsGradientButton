@@ -190,8 +190,15 @@
 
     free(locations);
     free(components);
+    
+    [self addGraphicsForState:aState forContext:context withOffset:cornerRadiusValue];
+
 }
 
+
+- (void)addGraphicsForState:(UIControlState)aState forContext:(CGContextRef)context withOffset:(CGFloat)offset {
+    // Override this method to add more Core Graphics Elements
+}
 
 
 
