@@ -14,8 +14,8 @@
 		<integer>0xFF000000</integer>
 		<key>colors</key>
 		<array>
-			<integer>0xFF0000FF</integer>
-			<integer>0xFF00FFFF</integer>
+			<integer>0x8F0000FF</integer>
+			<integer>0x7F00FFFF</integer>
 		</array>
 		<key>locations</key>
 		<array>
@@ -45,8 +45,8 @@
 		<integer>0xFF2E8B57</integer>
 		<key>colors</key>
 		<array>
-			<integer>0xFFFF0000</integer>
-			<integer>0xFFFFFF00</integer>
+			<integer>0x8FFF0000</integer>
+			<integer>0x70FFFF00</integer>
 		</array>
 		<key>locations</key>
 		<array>
