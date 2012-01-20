@@ -163,11 +163,12 @@
         double r = (rgb >> 16 & 0xFF)/255.0;
         double g = (rgb >> 8 & 0xFF)/255.0;
         double b = (rgb & 0xFF)/255.0;
+        double a = (rgb >> 24 & 0xFF)/255.0;
         
         components[i * 4] = r;
         components[(i * 4) + 1] = g;
         components[(i * 4) + 2] = b;
-        components[(i * 4) + 3] = 1.0;
+        components[(i * 4) + 3] = a;
     }
 
 
