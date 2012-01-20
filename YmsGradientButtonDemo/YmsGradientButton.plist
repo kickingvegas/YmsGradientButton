@@ -11,11 +11,11 @@
 		<key>borderColor</key>
 		<integer>0</integer>
 		<key>textColor</key>
-		<integer>0</integer>
+		<integer>0xFF000000</integer>
 		<key>colors</key>
 		<array>
-			<integer>16777215</integer>
-			<integer>13882323</integer>
+			<integer>0xFFFFFFFF</integer>
+			<integer>0xFFD3D3D3</integer>
 		</array>
 		<key>locations</key>
 		<array>
@@ -40,13 +40,13 @@
 		<key>cornerRadius</key>
 		<integer>3</integer>
 		<key>borderColor</key>
-		<integer>8421504</integer>
+		<integer>0xFF808080</integer>
 		<key>textColor</key>
-		<integer>3050327</integer>
+		<integer>0xFF2e8b57</integer>
 		<key>colors</key>
 		<array>
-			<integer>16777215</integer>
-			<integer>13882323</integer>
+			<integer>0xFFFFFFFF</integer>
+			<integer>0xFFD3D3D3</integer>
 		</array>
 		<key>locations</key>
 		<array>
@@ -71,13 +71,13 @@
 		<key>cornerRadius</key>
 		<integer>3</integer>
 		<key>borderColor</key>
-		<integer>10066329</integer>
+		<integer>0xFF999999</integer>
 		<key>textColor</key>
-		<integer>8421504</integer>
+		<integer>0xFF808080</integer>
 		<key>colors</key>
 		<array>
-			<integer>16777215</integer>
-			<integer>13882323</integer>
+			<integer>0xFFFFFFFF</integer>
+			<integer>0xFFD3D3D3</integer>
 		</array>
 		<key>locations</key>
 		<array>
@@ -107,7 +107,7 @@
 		<key>shadowOpacity</key>
 		<real>1.5</real>
 		<key>shadowColor</key>
-		<integer>0</integer>
+		<integer>0xFF000000</integer>
 		<key>shadowRadius</key>
 		<real>2.5</real>
 		<key>anchorPoint</key>
