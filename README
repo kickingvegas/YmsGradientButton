@@ -18,14 +18,20 @@ YmsGradientButton
 
 iOS UIButton subclass featuring plist configured bitmap-free gradients.
 
-NOTE: MAJOR SPECIFICATION CHANGE
+NOTE: MAJOR PLIST SPECIFICATION CHANGE
 
 * Colors in the plist files must now have an alpha channel field defined
   to comply with an ARGB (alpha, red, green, blue) format using a
   32-bit integer. So for example, a color set to 0xADBEEF should be
   changed to 0xFFADBEEF to have the alpha channel set to 1.0.
   (0xFF/255 = 255/255 = 1.0).
-  This change will break all checkouts of this codebase before January 12, 2012.
+  This change will break all plists using checkouts of this codebase 
+  before January 12, 2012. However, only the color values in your plist 
+  need to change to support an alpha channel field. All other plist fields
+  remain unchanged. 
+
+  To be clear - There are no API changes. Period.
+  
   The last commit value prior to this release was
   53519d75d9bf5a37dae67693c6341ceaa03371e7
 
