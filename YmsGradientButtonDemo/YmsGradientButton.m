@@ -115,7 +115,7 @@
 
     // Configure Text Color
     int textColorValue = [textColor integerValue];
-    [self setTitleColor:RGBCSS(textColorValue) forState:aState];
+    [self setTitleColor:ARGBCSS(textColorValue) forState:aState];
 
     float cornerRadiusValue = [cornerRadius floatValue];
     int borderColorValue = [borderColor integerValue];
@@ -129,7 +129,7 @@
                                                                              self.bounds.size.height - (cornerRadiusValue * 2))
                                                      cornerRadius:cornerRadiusValue];
     
-    [RGBCSS(borderColorValue) setStroke];
+    [ARGBCSS(borderColorValue) setStroke];
     [[UIColor clearColor] setFill];
     bPath.lineWidth = borderWidthValue;
     [bPath fill];
@@ -363,7 +363,7 @@
             
             self.layer.shadowOpacity = [shadowOpacity floatValue];
             self.layer.shadowRadius = [shadowRadius floatValue];
-            self.layer.shadowColor = [RGBCSS(c) CGColor];
+            self.layer.shadowColor = [ARGBCSS(c) CGColor];
         }
     }
 
