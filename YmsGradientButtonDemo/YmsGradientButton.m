@@ -221,7 +221,7 @@
         
         if ((colorArray == nil) || (colorArray.count == 0)) { 
             NSLog(@"ERROR: colors array is not defined in the %@ section of %@.plist", stateName, self.resourceName);
-            result = result | NO;
+            result = result & NO;
         }
         else {
             if (locations != nil) {
@@ -232,51 +232,51 @@
                 else if ((colorArray.count > locations.count) && (locations.count > 0)) {
                     NSLog(@"ERROR:The size of the array colors and the array locations do not match in the %@ section of %@.plist. "
                           "They should either be equal or there should be no elements in the locations array.", stateName, self.resourceName);
-                    result = result | NO;
+                    result = result & NO;
                 }
             }
         }
         
         if (startPoint == nil) {
             NSLog(@"ERROR: startPoint is not defined in the %@ section of %@.plist", stateName, self.resourceName);
-            result = result | NO;
+            result = result & NO;
         }
         else {
             if (startPoint.count != 2) {
                 NSLog(@"ERROR: startPoint must have 2 elements (default 0.5, 0.0) in the %@ section of %@.plist", stateName, self.resourceName);
-                result = result | NO;
+                result = result & NO;
             }
         }
         
         if (endPoint == nil) {
             NSLog(@"ERROR: endPoint is not defined in the %@ section of %@.plist", stateName, self.resourceName);
-            result = result | NO;
+            result = result & NO;
         } 
         else {
             if (endPoint.count != 2) {
                 NSLog(@"ERROR: endPoint must have 2 elements (default 0.5, 1.0) in the %@ section of %@.plist", stateName, self.resourceName);
-                result = result | NO;
+                result = result & NO;
             }
         }
         
         if (textColor == nil) {
             NSLog(@"ERROR: textColor is not defined in the %@ section of %@.plist", stateName, self.resourceName);
-            result = result | NO;
+            result = result & NO;
         }
         
         if (cornerRadius == nil) {
             NSLog(@"ERROR: cornerRadius is not defined in the %@ section of %@.plist", stateName, self.resourceName);
-            result = result | NO;
+            result = result & NO;
         }
 
         if (borderColor == nil) {
             NSLog(@"ERROR: borderColor is not defined in the %@ section of %@.plist", stateName, self.resourceName);
-            result = result | NO;
+            result = result & NO;
         }
         
         if (borderWidth == nil) {
             NSLog(@"ERROR: borderWidth is not defined in the %@ section of %@.plist", stateName, self.resourceName);
-            result = result | NO;
+            result = result & NO;
         }
     }
 
@@ -292,40 +292,40 @@
         
         if (enable == nil) {
             NSLog(@"ERROR: enable is not defined in the shadow section of %@.plist", self.resourceName);
-            result = result | NO;
+            result = result & NO;
         }
         
         if (shadowOffset == nil) {
             NSLog(@"ERROR: shadowOffset is not defined in the shadow section of %@.plist", self.resourceName);
-            result = result | NO;
+            result = result & NO;
         }
         else if (shadowOffset.count < 2) {
             NSLog(@"ERROR: shadowOffset array size must be 2 in the shadow section of %@.plist", self.resourceName);
-            result = result | NO;
+            result = result & NO;
         }
 
         if (anchorPoint == nil) {
             NSLog(@"ERROR: anchorPoint is not defined in the shadow section of %@.plist", self.resourceName);
-            result = result | NO;
+            result = result & NO;
         }
         else if (anchorPoint.count < 2) {
             NSLog(@"ERROR: anchorPoint array size must be 2 in the shadow section of %@.plist", self.resourceName);
-            result = result | NO;
+            result = result & NO;
         }
         
         if (shadowOpacity == nil) {
             NSLog(@"ERROR: shadowOpacity is not defined in the shadow section of %@.plist", self.resourceName);
-            result = result | NO;
+            result = result & NO;
         }
 
         if (shadowColor == nil) {
             NSLog(@"ERROR: shadowColor is not defined in the shadow section of %@.plist", self.resourceName);
-            result = result | NO;
+            result = result & NO;
         }
         
         if (shadowRadius == nil) {
             NSLog(@"ERROR: shadowRadius is not defined in the shadow section of %@.plist", self.resourceName);
-            result = result | NO;
+            result = result & NO;
         }
         
         
