@@ -130,13 +130,11 @@
     int borderColorValue = [borderColor integerValue];
     float borderWidthValue = [borderWidth floatValue];
     
-    float roundBorderMargin = cornerRadiusValue > 0 ? 1.0 : 0.0;
-
     // Render path and set clipping region
-    UIBezierPath *bPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(roundBorderMargin,
-                                                                             roundBorderMargin,
-                                                                             self.bounds.size.width - (roundBorderMargin * 2),
-                                                                             self.bounds.size.height - (roundBorderMargin * 2))
+    UIBezierPath *bPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(cornerRadiusValue,
+                                                                             cornerRadiusValue,
+                                                                             self.bounds.size.width - (cornerRadiusValue * 2),
+                                                                             self.bounds.size.height - (cornerRadiusValue * 2))
                                                      cornerRadius:cornerRadiusValue];
     
     [ARGBCSS(borderColorValue) setStroke];
@@ -156,16 +154,9 @@
     
     
     for (NSDictionary *gradient in gradients) {
-        NSArray *colorsArray = (NSArray *)[gradient objectForKey:@"colors"];
-        NSArray *locationsArray = (NSArray *)[gradient objectForKey:@"locations"];
-        NSArray *startPointArray = (NSArray *)[gradient objectForKey:@"startPoint"];
-        NSArray *endPointArray = (NSArray *)[gradient objectForKey:@"endPoint"];
         [self contextDrawGradient:context
-                       colorSpace:rgbColorSpace
-                           colors:colorsArray
-                        locations:locationsArray
-                       startPoint:startPointArray
-                         endPoint:endPointArray];
+                         gradient:gradient
+                       colorSpace:rgbColorSpace];
     }
 
         
@@ -176,11 +167,12 @@
 
 
 - (void)contextDrawGradient:(CGContextRef)context
-                 colorSpace:(CGColorSpaceRef)rgbColorSpace
-                     colors:(NSArray *)colorsArray
-                  locations:(NSArray *)locationsArray
-                 startPoint:(NSArray *)startPointArray
-                   endPoint:(NSArray *)endPointArray {
+                   gradient:(NSDictionary *)gradient
+                 colorSpace:(CGColorSpaceRef)rgbColorSpace {
+
+    NSArray *colorsArray = (NSArray *)[gradient objectForKey:@"colors"];
+    NSArray *locationsArray = (NSArray *)[gradient objectForKey:@"locations"];
+    NSString *gradientType = (NSString *)[gradient objectForKey:@"type"];
     
     CGGradientRef stateGradient;
     
@@ -218,21 +210,97 @@
     
     CGRect currentBounds = self.bounds;
     
-    float startPointNormalizeX = [(NSNumber *)[startPointArray objectAtIndex:0] floatValue];
-    float startPointNormalizeY = [(NSNumber *)[startPointArray objectAtIndex:1] floatValue];
-    float endPointNormalizeX = [(NSNumber *)[endPointArray objectAtIndex:0] floatValue];
-    float endPointNormalizeY = [(NSNumber *)[endPointArray objectAtIndex:1] floatValue];
+    if ([gradientType isEqualToString:@"linear"]) {
+        NSArray *startPointArray = (NSArray *)[gradient objectForKey:@"startPoint"];
+        NSArray *endPointArray = (NSArray *)[gradient objectForKey:@"endPoint"];
     
-    CGPoint startPoint = CGPointMake(CGRectGetMaxX(currentBounds) * startPointNormalizeX, CGRectGetMaxY(currentBounds) * startPointNormalizeY);
-    CGPoint endPoint = CGPointMake(CGRectGetMaxX(currentBounds) * endPointNormalizeX, CGRectGetMaxY(currentBounds) * endPointNormalizeY);
-    
-    CGContextDrawLinearGradient(context, stateGradient, startPoint, endPoint, kCGGradientDrawsBeforeStartLocation | kCGGradientDrawsAfterEndLocation);
-    
+        float startPointNormalizeX = [(NSNumber *)[startPointArray objectAtIndex:0] floatValue];
+        float startPointNormalizeY = [(NSNumber *)[startPointArray objectAtIndex:1] floatValue];
+        float endPointNormalizeX = [(NSNumber *)[endPointArray objectAtIndex:0] floatValue];
+        float endPointNormalizeY = [(NSNumber *)[endPointArray objectAtIndex:1] floatValue];
+        
+        CGPoint startPoint = CGPointMake(CGRectGetMaxX(currentBounds) * startPointNormalizeX, CGRectGetMaxY(currentBounds) * startPointNormalizeY);
+        CGPoint endPoint = CGPointMake(CGRectGetMaxX(currentBounds) * endPointNormalizeX, CGRectGetMaxY(currentBounds) * endPointNormalizeY);
+        
+        CGContextDrawLinearGradient(context,
+                                    stateGradient,
+                                    startPoint,
+                                    endPoint,
+                                    kCGGradientDrawsBeforeStartLocation |
+                                    kCGGradientDrawsAfterEndLocation);
+    }
+    else if ([gradientType isEqualToString:@"radial"]) {
+        
+        
+        NSArray *startCenterArray = (NSArray *)[gradient objectForKey:@"startCenter"];
+        NSString *startRadiusString = (NSString *)[gradient objectForKey:@"startRadius"];
+
+        NSArray *endCenterArray = (NSArray *)[gradient objectForKey:@"endCenter"];
+        NSString *endRadiusString = (NSString *)[gradient objectForKey:@"endRadius"];
+        
+
+        float startCenterNormalizeX = [(NSNumber *)[startCenterArray objectAtIndex:0] floatValue];
+        float startCenterNormalizeY = [(NSNumber *)[startCenterArray objectAtIndex:1] floatValue];
+        float endCenterNormalizeX = [(NSNumber *)[endCenterArray objectAtIndex:0] floatValue];
+        float endCenterNormalizeY = [(NSNumber *)[endCenterArray objectAtIndex:1] floatValue];
+        
+        CGPoint startCenter = CGPointMake(startCenterNormalizeX * CGRectGetWidth(currentBounds),
+                                          startCenterNormalizeY * CGRectGetHeight(currentBounds));
+        
+        CGPoint endCenter = CGPointMake(endCenterNormalizeX * CGRectGetWidth(currentBounds),
+                                        endCenterNormalizeY * CGRectGetHeight(currentBounds));
+        
+        float startRadius = [self calculateRadius:startRadiusString bounds:currentBounds];
+        float endRadius = [self calculateRadius:endRadiusString bounds:currentBounds];
+        
+        CGContextDrawRadialGradient(context,
+                                    stateGradient,
+                                    startCenter,
+                                    startRadius,
+                                    endCenter,
+                                    endRadius,
+                                    kCGGradientDrawsBeforeStartLocation |
+                                    kCGGradientDrawsAfterEndLocation);
+    }
+    else {
+        // Validation should prevent invalid gradientType from reaching here.
+        NSLog(@"Illegal gradientType: %@", gradientType);
+        [NSException raise:@"Invalid YmsGradientButton Configuration"
+                    format:@"Please correct '%@.plist' to resume operation.", self.resourceName];
+    }
     
     CGGradientRelease(stateGradient);
     
     free(locations);
     free(components);
+}
+
+
+- (float)calculateRadius:(NSString *)radiusString bounds:(CGRect)currentBounds {
+    float result;
+    float percentValue;
+    
+    if ([self isPercent:radiusString]) {
+        NSString *percentValueString = [radiusString substringToIndex:[radiusString length] - 1];
+        percentValue = [percentValueString floatValue];
+        result = CGRectGetWidth(currentBounds) * percentValue/200.0;
+    }
+    else {
+        result = [radiusString floatValue];
+    }
+    
+    return result;
+}
+
+
+- (BOOL)isPercent:(NSString *)buf {
+    BOOL result = NO;
+    char c = [buf characterAtIndex:[buf length] - 1];
+    
+    if (c == '%') {
+        result = YES;
+    }
+    return  result;
 }
 
 
@@ -244,6 +312,8 @@
 
 - (BOOL)validateConfiguration:(NSDictionary *)buttonConfig {
     BOOL result = YES;
+    
+    return result;
     
     NSMutableArray *states = [[NSMutableArray alloc] initWithObjects:@"normal"
                               , @"disabled"
