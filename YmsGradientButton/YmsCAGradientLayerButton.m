@@ -100,10 +100,10 @@
     
     int n = [textColor integerValue];
 
-    [self setTitleColor:RGBCSS(n) forState:aState];
+    [self setTitleColor:ARGBCSS(n) forState:aState];
     lastGradientLayer.cornerRadius = [cornerRadius integerValue];
     lastGradientLayer.masksToBounds = YES;
-    lastGradientLayer.borderColor = [RGBCSS(borderColorValue) CGColor];
+    lastGradientLayer.borderColor = [ARGBCSS(borderColorValue) CGColor];
     lastGradientLayer.borderWidth = [borderWidth floatValue];
     
     return [NSArray arrayWithArray:gradientLayers];
