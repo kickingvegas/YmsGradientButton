@@ -51,13 +51,16 @@
                  forContext:(CGContextRef)context
                  withOffset:(CGFloat)offset;
 
-- (void)contextDrawGradient:(CGContextRef)context
-                 colorSpace:(CGColorSpaceRef)rgbColorSpace
-                     colors:(NSArray *)colorsArray
-                  locations:(NSArray *)locationsArray
-                 startPoint:(NSArray *)startPointArray
-                   endPoint:(NSArray *)endPointArray;
 
+- (void)contextDrawGradient:(CGContextRef)context
+                   gradient:(NSDictionary *)gradient
+                 colorSpace:(CGColorSpaceRef)rgbColorSpace;
+
+
+- (BOOL)isPercent:(NSString *)buf;
+
+
+- (float)calculateRadius:(NSString *)radiusString bounds:(CGRect)currentBounds;
 
     
 
