@@ -26,7 +26,8 @@
 @property (nonatomic, strong) NSString *resourceName;
 
 
-- (void)genGradientForState:(UIControlState)aState withConfig:(NSDictionary *)buttonConfig;
+- (void)genGradientsForState:(UIControlState)aState
+                  withConfig:(NSDictionary *)buttonConfig;
 
 - (void)configureShadow:(NSDictionary *)buttonConfig;
 
@@ -41,14 +42,23 @@
  * provided you maintain compliance with the plist specification.
  */
 
-- (void)gradientImplementationForState:(UIControlState)aState 
-                            withConfig:(NSDictionary *)buttonConfig 
-                            forContext:(CGContextRef)context;
+- (void)gradientsImplementationForState:(UIControlState)aState
+                             withConfig:(NSDictionary *)buttonConfig
+                             forContext:(CGContextRef)context;
 
 
 - (void)addGraphicsForState:(UIControlState)aState 
                  forContext:(CGContextRef)context
                  withOffset:(CGFloat)offset;
 
+- (void)contextDrawGradient:(CGContextRef)context
+                 colorSpace:(CGColorSpaceRef)rgbColorSpace
+                     colors:(NSArray *)colorsArray
+                  locations:(NSArray *)locationsArray
+                 startPoint:(NSArray *)startPointArray
+                   endPoint:(NSArray *)endPointArray;
+
+
+    
 
 @end
