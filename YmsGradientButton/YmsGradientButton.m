@@ -63,7 +63,7 @@
     }
     else {
         [NSException raise:@"Invalid YmsGradientButton Configuration" 
-                    format:@"Please revise the file %@.plist to confirm that it has legal values.", self.resourceName];
+                    format:@"Please correct '%@.plist' to resume operation.", self.resourceName];
     }
 }
 
@@ -183,7 +183,6 @@
                    endPoint:(NSArray *)endPointArray {
     
     CGGradientRef stateGradient;
-    //CGColorSpaceRef rgbColorspace;
     
     CGFloat *locations = malloc(sizeof(CGFloat) * locationsArray.count);
     
@@ -215,7 +214,6 @@
     }
     
     
-    //rgbColorspace = CGColorSpaceCreateDeviceRGB();
     stateGradient = CGGradientCreateWithColorComponents(rgbColorSpace, components, locations, numLocations);
     
     CGRect currentBounds = self.bounds;
@@ -247,132 +245,126 @@
 - (BOOL)validateConfiguration:(NSDictionary *)buttonConfig {
     BOOL result = YES;
     
-    return result;
+    NSMutableArray *states = [[NSMutableArray alloc] initWithObjects:@"normal"
+                              , @"disabled"
+                              , nil];
     
-    NSArray *states = [[NSArray alloc] initWithObjects:@"normal", @"highlighted", @"disabled", nil];
+    
+    for (NSString *key in [NSArray arrayWithObjects:@"highlighted"
+                           , @"selected"
+                           , nil]) {
+        if ([buttonConfig objectForKey:key] != nil) {
+            [states addObject:key];
+        }
+    }
+    
+    
+    NSArray *gradientKeys = [NSArray arrayWithObjects:@"colors"
+                             , @"locations"
+                             , @"startPoint"
+                             , @"endPoint"
+                             , nil];
+
+    NSArray *stateKeys = [NSArray arrayWithObjects:@"borderColor"
+                          , @"borderWidth"
+                          , @"cornerRadius"
+                          , @"textColor"
+                          , @"gradients"
+                          , nil];
     
     for (NSString *stateName in states) {
-        NSArray *colorArray = (NSArray *)[(NSDictionary *)[buttonConfig objectForKey:stateName] objectForKey:@"colors"];
-        NSArray *locations = (NSArray *)[(NSDictionary *)[buttonConfig objectForKey:stateName] objectForKey:@"locations"];
-        NSArray *startPoint = (NSArray *)[(NSDictionary *)[buttonConfig objectForKey:stateName] objectForKey:@"startPoint"];
-        NSArray *endPoint = (NSArray *)[(NSDictionary *)[buttonConfig objectForKey:stateName] objectForKey:@"endPoint"];
+        NSDictionary *stateDict = (NSDictionary *)[buttonConfig objectForKey:stateName];
         
-        NSNumber *textColor = (NSNumber *)[(NSDictionary *)[buttonConfig objectForKey:stateName] objectForKey:@"textColor"];
-        NSNumber *cornerRadius = (NSNumber *)[(NSDictionary *)[buttonConfig objectForKey:stateName] objectForKey:@"cornerRadius"];
-        NSNumber *borderColor = (NSNumber *)[(NSDictionary *)[buttonConfig objectForKey:stateName] objectForKey:@"borderColor"];
-        NSNumber *borderWidth = (NSNumber *)[(NSDictionary *)[buttonConfig objectForKey:stateName] objectForKey:@"borderWidth"];
-        
-        if ((colorArray == nil) || (colorArray.count == 0)) { 
-            NSLog(@"ERROR: colors array is not defined in the %@ section of %@.plist", stateName, self.resourceName);
-            result = result & NO;
-        }
-        else {
-            if (locations != nil) {
-                if (colorArray.count < locations.count)
-                    NSLog(@"WARNING: colors and locations array count mismatch in the %@ section of %@.plist. " 
-                          "They should either be equal or there should be no elements in the locations array.", stateName, self.resourceName);
-                
-                else if ((colorArray.count > locations.count) && (locations.count > 0)) {
-                    NSLog(@"ERROR:The size of the array colors and the array locations do not match in the %@ section of %@.plist. "
-                          "They should either be equal or there should be no elements in the locations array.", stateName, self.resourceName);
-                    result = result & NO;
+        for (NSString *stateKey in stateKeys) {
+            id obj = [stateDict objectForKey:stateKey];
+            
+            if (obj == nil) {
+                NSLog(@"[ERROR: %@.plist]: %@ is not defined in the %@ section", self.resourceName, stateKey, stateName);
+                result = result & NO;
+            }
+            else {
+                if ([stateKey isEqualToString:@"gradients"]) {
+                    NSArray *gradients = (NSArray *)obj;
+                    if (gradients.count == 0) {
+                        result = result & NO;
+                    }
+                    else {
+                        // iterate through gradients
+                        NSUInteger index = 0;
+                        for (NSDictionary *gradient in gradients) {
+                            // Processing each gradient defined in the plist
+                            
+                            for (NSString *gradientKey in gradientKeys) {
+                                id gv = [gradient objectForKey:gradientKey];
+                                
+                                if (gv == nil) {
+                                    NSLog(@"[ERROR: %@.plist]: %@.%@[%d].%@ is not defined.", self.resourceName, stateName, stateKey, index, gradientKey);
+                                    result = result & NO;
+                                }
+                                
+                                else {
+                                    if ([gradientKey isEqualToString:@"startPoint"] ||
+                                        [gradientKey isEqualToString:@"endPoint"]) {
+                                        NSArray *pointArray = (NSArray *)gv;
+                                        if (pointArray.count < 2) {
+                                            NSLog(@"[ERROR: %@.plist]: %@.%@[%d].%@ must have 2 elements.", self.resourceName, stateName, stateKey, index, gradientKey);
+                                        }
+                                    }
+
+                                }
+                            }
+                            
+
+                            NSArray *colorArray = (NSArray *)[gradient objectForKey:@"colors"];
+                            NSArray *locations = (NSArray *)[gradient objectForKey:@"locations"];
+                            
+                            if (colorArray.count != locations.count) {
+                                NSLog(@"[ERROR: %@.plist]: %@.%@[%d].colors.count != locations.count.", self.resourceName, stateName, stateKey, index);
+                                result = result & NO;
+                            }
+                            
+                            index++;
+                        }
+                    }
                 }
             }
         }
-        
-        if (startPoint == nil) {
-            NSLog(@"ERROR: startPoint is not defined in the %@ section of %@.plist", stateName, self.resourceName);
-            result = result & NO;
-        }
-        else {
-            if (startPoint.count != 2) {
-                NSLog(@"ERROR: startPoint must have 2 elements (default 0.5, 0.0) in the %@ section of %@.plist", stateName, self.resourceName);
-                result = result & NO;
-            }
-        }
-        
-        if (endPoint == nil) {
-            NSLog(@"ERROR: endPoint is not defined in the %@ section of %@.plist", stateName, self.resourceName);
-            result = result & NO;
-        } 
-        else {
-            if (endPoint.count != 2) {
-                NSLog(@"ERROR: endPoint must have 2 elements (default 0.5, 1.0) in the %@ section of %@.plist", stateName, self.resourceName);
-                result = result & NO;
-            }
-        }
-        
-        if (textColor == nil) {
-            NSLog(@"ERROR: textColor is not defined in the %@ section of %@.plist", stateName, self.resourceName);
-            result = result & NO;
-        }
-        
-        if (cornerRadius == nil) {
-            NSLog(@"ERROR: cornerRadius is not defined in the %@ section of %@.plist", stateName, self.resourceName);
-            result = result & NO;
-        }
-
-        if (borderColor == nil) {
-            NSLog(@"ERROR: borderColor is not defined in the %@ section of %@.plist", stateName, self.resourceName);
-            result = result & NO;
-        }
-        
-        if (borderWidth == nil) {
-            NSLog(@"ERROR: borderWidth is not defined in the %@ section of %@.plist", stateName, self.resourceName);
-            result = result & NO;
-        }
     }
-
+    
+    
+    NSArray *shadowKeys = [NSArray arrayWithObjects:@"enable"
+                           , @"shadowOffset"
+                           , @"anchorPoint"
+                           , @"shadowOpacity"
+                           , @"shadowColor"
+                           , @"shadowRadius"
+                           , nil];
+    
+   
     NSDictionary *shadow = (NSDictionary *)[buttonConfig objectForKey:@"shadow"];
 
     if (shadow != nil) {
-        NSNumber *enable = (NSNumber *)[shadow objectForKey:@"enable"];
-        NSArray *shadowOffset = (NSArray *)[shadow objectForKey:@"shadowOffset"];
-        NSArray *anchorPoint = (NSArray *)[shadow objectForKey:@"anchorPoint"];
-        NSNumber *shadowOpacity = (NSNumber *)[shadow objectForKey:@"shadowOpacity"];
-        NSNumber *shadowColor = (NSNumber *)[shadow objectForKey:@"shadowColor"];
-        NSNumber *shadowRadius = (NSNumber *)[shadow objectForKey:@"shadowRadius"];
-        
-        if (enable == nil) {
-            NSLog(@"ERROR: enable is not defined in the shadow section of %@.plist", self.resourceName);
-            result = result & NO;
+        for (NSString *shadowKey in shadowKeys) {
+            id obj = [shadow objectForKey:shadowKey];
+            
+            if (obj == nil) {
+                NSLog(@"[ERROR: %@.plist]: shadow.%@ is not defined.", self.resourceName, shadowKey);
+                result = result & NO;
+            }
+            else {
+                if ([shadowKey isEqualToString:@"anchorPoint"] ||
+                    [shadowKey isEqualToString:@"shadowOffset"]) {
+                    NSArray *pointArray = (NSArray *)obj;
+                    
+                    if (pointArray.count < 2) {
+                        NSLog(@"[ERROR: %@.plist]: shadow.%@.count must equal 2.", self.resourceName, shadowKey);
+                        result = result & NO;
+                    }
+                }
+            }
+                      
         }
-        
-        if (shadowOffset == nil) {
-            NSLog(@"ERROR: shadowOffset is not defined in the shadow section of %@.plist", self.resourceName);
-            result = result & NO;
-        }
-        else if (shadowOffset.count < 2) {
-            NSLog(@"ERROR: shadowOffset array size must be 2 in the shadow section of %@.plist", self.resourceName);
-            result = result & NO;
-        }
-
-        if (anchorPoint == nil) {
-            NSLog(@"ERROR: anchorPoint is not defined in the shadow section of %@.plist", self.resourceName);
-            result = result & NO;
-        }
-        else if (anchorPoint.count < 2) {
-            NSLog(@"ERROR: anchorPoint array size must be 2 in the shadow section of %@.plist", self.resourceName);
-            result = result & NO;
-        }
-        
-        if (shadowOpacity == nil) {
-            NSLog(@"ERROR: shadowOpacity is not defined in the shadow section of %@.plist", self.resourceName);
-            result = result & NO;
-        }
-
-        if (shadowColor == nil) {
-            NSLog(@"ERROR: shadowColor is not defined in the shadow section of %@.plist", self.resourceName);
-            result = result & NO;
-        }
-        
-        if (shadowRadius == nil) {
-            NSLog(@"ERROR: shadowRadius is not defined in the shadow section of %@.plist", self.resourceName);
-            result = result & NO;
-        }
-        
-        
-
+      
     }
     return result;
 }
@@ -410,7 +402,6 @@
             self.layer.shadowColor = [ARGBCSS(c) CGColor];
         }
     }
-
 }
 
 
