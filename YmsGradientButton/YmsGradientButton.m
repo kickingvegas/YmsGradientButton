@@ -313,8 +313,6 @@
 - (BOOL)validateConfiguration:(NSDictionary *)buttonConfig {
     BOOL result = YES;
     
-    return result;
-    
     NSMutableArray *states = [[NSMutableArray alloc] initWithObjects:@"normal"
                               , @"disabled"
                               , nil];
@@ -329,11 +327,12 @@
     }
     
     
-    NSArray *gradientKeys = [NSArray arrayWithObjects:@"colors"
-                             , @"locations"
-                             , @"startPoint"
-                             , @"endPoint"
-                             , nil];
+    NSMutableArray *gradientKeys = [[NSMutableArray alloc]initWithCapacity:7];
+    
+    [gradientKeys addObject:@"type"];
+    [gradientKeys addObject:@"colors"];
+    [gradientKeys addObject:@"locations"];
+    
 
     NSArray *stateKeys = [NSArray arrayWithObjects:@"borderColor"
                           , @"borderWidth"
@@ -364,6 +363,34 @@
                         for (NSDictionary *gradient in gradients) {
                             // Processing each gradient defined in the plist
                             
+                            NSMutableIndexSet *indexSet = [[NSMutableIndexSet alloc] init];
+                            int clear = [gradientKeys count] - 3;
+                            
+                            for (int j=0; j < clear; j++) {
+                                [indexSet addIndex:(j + 3)];
+                            }
+                            
+                            [gradientKeys removeObjectsAtIndexes:indexSet];
+
+                            NSString *gradientType = [gradient objectForKey:@"type"];
+                            
+                            if (gradientType == nil) {
+                                NSLog(@"[ERROR: %@.plist]: %@.%@[%d].type is not defined.", self.resourceName, stateName, stateKey, index);
+                                result = result & NO;
+                            }
+                            else if ([gradientType isEqualToString:@"linear"]) {
+                                [gradientKeys addObject:@"startPoint"];
+                                [gradientKeys addObject:@"endPoint"];
+                            }
+                            else if ([gradientType isEqualToString:@"radial"]) {
+                                [gradientKeys addObject:@"startCenter"];
+                                [gradientKeys addObject:@"startRadius"];
+                                [gradientKeys addObject:@"endCenter"];
+                                [gradientKeys addObject:@"endRadius"];
+                            }
+
+                            
+                            
                             for (NSString *gradientKey in gradientKeys) {
                                 id gv = [gradient objectForKey:gradientKey];
                                 
@@ -374,13 +401,15 @@
                                 
                                 else {
                                     if ([gradientKey isEqualToString:@"startPoint"] ||
-                                        [gradientKey isEqualToString:@"endPoint"]) {
+                                        [gradientKey isEqualToString:@"endPoint"] ||
+                                        [gradientKey isEqualToString:@"startCenter"] ||
+                                        [gradientKey isEqualToString:@"endCenter"]) {
                                         NSArray *pointArray = (NSArray *)gv;
-                                        if (pointArray.count < 2) {
+                                        if (pointArray.count != 2) {
                                             NSLog(@"[ERROR: %@.plist]: %@.%@[%d].%@ must have 2 elements.", self.resourceName, stateName, stateKey, index, gradientKey);
+                                            result = result & NO;
                                         }
                                     }
-
                                 }
                             }
                             
