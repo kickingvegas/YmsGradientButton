@@ -20,13 +20,13 @@
 		D9802CD814BD79E000D508D2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9802CB914BD79E000D508D2 /* Foundation.framework */; };
 		D9802CE014BD79E000D508D2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D9802CDE14BD79E000D508D2 /* InfoPlist.strings */; };
 		D9802CE314BD79E000D508D2 /* YmsGradientButtonDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D9802CE214BD79E000D508D2 /* YmsGradientButtonDemoTests.m */; };
-		D9802CEE14BD7A3B00D508D2 /* YmsGradientButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D9802CED14BD7A3B00D508D2 /* YmsGradientButton.m */; };
-		D9802CF014BD7A5100D508D2 /* YmsGradientButton.plist in Resources */ = {isa = PBXBuildFile; fileRef = D9802CEF14BD7A5100D508D2 /* YmsGradientButton.plist */; };
 		D9802CF314BD7ACD00D508D2 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9802CF214BD7ACD00D508D2 /* QuartzCore.framework */; };
+		D99D9E0215C7938500A0C098 /* YmsCAGradientLayerButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D99D9DFC15C7938500A0C098 /* YmsCAGradientLayerButton.m */; };
+		D99D9E0315C7938500A0C098 /* YmsCAGradientLayerButton.plist in Resources */ = {isa = PBXBuildFile; fileRef = D99D9DFD15C7938500A0C098 /* YmsCAGradientLayerButton.plist */; };
+		D99D9E0415C7938500A0C098 /* YmsGradientButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D99D9DFF15C7938500A0C098 /* YmsGradientButton.m */; };
+		D99D9E0515C7938500A0C098 /* YmsGradientButton.plist in Resources */ = {isa = PBXBuildFile; fileRef = D99D9E0015C7938500A0C098 /* YmsGradientButton.plist */; };
 		D9E0A7E714BD80C400079CE7 /* YourButton.plist in Resources */ = {isa = PBXBuildFile; fileRef = D9E0A7E614BD80C400079CE7 /* YourButton.plist */; };
 		D9E0A7EB14BD80E400079CE7 /* YourButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D9E0A7EA14BD80E400079CE7 /* YourButton.m */; };
-		D9F3150214BE88F800351ECC /* YmsCAGradientLayerButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D9F3150114BE88F800351ECC /* YmsCAGradientLayerButton.m */; };
-		D9F3150514BE898700351ECC /* YmsCAGradientLayerButton.plist in Resources */ = {isa = PBXBuildFile; fileRef = D9F3150414BE898700351ECC /* YmsCAGradientLayerButton.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,17 +59,17 @@
 		D9802CDF14BD79E000D508D2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D9802CE114BD79E000D508D2 /* YmsGradientButtonDemoTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YmsGradientButtonDemoTests.h; sourceTree = "<group>"; };
 		D9802CE214BD79E000D508D2 /* YmsGradientButtonDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YmsGradientButtonDemoTests.m; sourceTree = "<group>"; };
-		D9802CEC14BD7A3B00D508D2 /* YmsGradientButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YmsGradientButton.h; sourceTree = "<group>"; };
-		D9802CED14BD7A3B00D508D2 /* YmsGradientButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YmsGradientButton.m; sourceTree = "<group>"; };
-		D9802CEF14BD7A5100D508D2 /* YmsGradientButton.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = YmsGradientButton.plist; sourceTree = "<group>"; };
-		D9802CF114BD7AAC00D508D2 /* YmsStyleSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YmsStyleSheet.h; sourceTree = "<group>"; };
 		D9802CF214BD7ACD00D508D2 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		D99D9DFB15C7938500A0C098 /* YmsCAGradientLayerButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YmsCAGradientLayerButton.h; sourceTree = "<group>"; };
+		D99D9DFC15C7938500A0C098 /* YmsCAGradientLayerButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YmsCAGradientLayerButton.m; sourceTree = "<group>"; };
+		D99D9DFD15C7938500A0C098 /* YmsCAGradientLayerButton.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = YmsCAGradientLayerButton.plist; sourceTree = "<group>"; };
+		D99D9DFE15C7938500A0C098 /* YmsGradientButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YmsGradientButton.h; sourceTree = "<group>"; };
+		D99D9DFF15C7938500A0C098 /* YmsGradientButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YmsGradientButton.m; sourceTree = "<group>"; };
+		D99D9E0015C7938500A0C098 /* YmsGradientButton.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = YmsGradientButton.plist; sourceTree = "<group>"; };
+		D99D9E0115C7938500A0C098 /* YmsStyleSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YmsStyleSheet.h; sourceTree = "<group>"; };
 		D9E0A7E614BD80C400079CE7 /* YourButton.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = YourButton.plist; sourceTree = "<group>"; };
 		D9E0A7E914BD80E400079CE7 /* YourButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YourButton.h; sourceTree = "<group>"; };
 		D9E0A7EA14BD80E400079CE7 /* YourButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YourButton.m; sourceTree = "<group>"; };
-		D9F3150014BE88F800351ECC /* YmsCAGradientLayerButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YmsCAGradientLayerButton.h; sourceTree = "<group>"; };
-		D9F3150114BE88F800351ECC /* YmsCAGradientLayerButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YmsCAGradientLayerButton.m; sourceTree = "<group>"; };
-		D9F3150414BE898700351ECC /* YmsCAGradientLayerButton.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = YmsCAGradientLayerButton.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +100,7 @@
 		D9802CA814BD79DF00D508D2 = {
 			isa = PBXGroup;
 			children = (
+				D99D9DFA15C7938500A0C098 /* YmsGradientButton */,
 				D9802CBD14BD79E000D508D2 /* YmsGradientButtonDemo */,
 				D9802CDB14BD79E000D508D2 /* YmsGradientButtonDemoTests */,
 				D9802CB614BD79DF00D508D2 /* Frameworks */,
@@ -135,16 +136,9 @@
 				D9802CC714BD79E000D508D2 /* AppDelegate.m */,
 				D9802CC914BD79E000D508D2 /* ViewController.h */,
 				D9802CCA14BD79E000D508D2 /* ViewController.m */,
-				D9802CF114BD7AAC00D508D2 /* YmsStyleSheet.h */,
-				D9802CEC14BD7A3B00D508D2 /* YmsGradientButton.h */,
-				D9802CED14BD7A3B00D508D2 /* YmsGradientButton.m */,
-				D9802CEF14BD7A5100D508D2 /* YmsGradientButton.plist */,
 				D9E0A7E914BD80E400079CE7 /* YourButton.h */,
 				D9E0A7EA14BD80E400079CE7 /* YourButton.m */,
 				D9E0A7E614BD80C400079CE7 /* YourButton.plist */,
-				D9F3150014BE88F800351ECC /* YmsCAGradientLayerButton.h */,
-				D9F3150114BE88F800351ECC /* YmsCAGradientLayerButton.m */,
-				D9F3150414BE898700351ECC /* YmsCAGradientLayerButton.plist */,
 				D9802CCC14BD79E000D508D2 /* ViewController.xib */,
 				D9802CBE14BD79E000D508D2 /* Supporting Files */,
 			);
@@ -179,6 +173,20 @@
 				D9802CDE14BD79E000D508D2 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D99D9DFA15C7938500A0C098 /* YmsGradientButton */ = {
+			isa = PBXGroup;
+			children = (
+				D99D9E0115C7938500A0C098 /* YmsStyleSheet.h */,
+				D99D9DFE15C7938500A0C098 /* YmsGradientButton.h */,
+				D99D9DFF15C7938500A0C098 /* YmsGradientButton.m */,
+				D99D9E0015C7938500A0C098 /* YmsGradientButton.plist */,
+				D99D9DFB15C7938500A0C098 /* YmsCAGradientLayerButton.h */,
+				D99D9DFC15C7938500A0C098 /* YmsCAGradientLayerButton.m */,
+				D99D9DFD15C7938500A0C098 /* YmsCAGradientLayerButton.plist */,
+			);
+			path = YmsGradientButton;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -254,9 +262,9 @@
 			files = (
 				D9802CC214BD79E000D508D2 /* InfoPlist.strings in Resources */,
 				D9802CCE14BD79E000D508D2 /* ViewController.xib in Resources */,
-				D9802CF014BD7A5100D508D2 /* YmsGradientButton.plist in Resources */,
 				D9E0A7E714BD80C400079CE7 /* YourButton.plist in Resources */,
-				D9F3150514BE898700351ECC /* YmsCAGradientLayerButton.plist in Resources */,
+				D99D9E0315C7938500A0C098 /* YmsCAGradientLayerButton.plist in Resources */,
+				D99D9E0515C7938500A0C098 /* YmsGradientButton.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,9 +302,9 @@
 				D9802CC414BD79E000D508D2 /* main.m in Sources */,
 				D9802CC814BD79E000D508D2 /* AppDelegate.m in Sources */,
 				D9802CCB14BD79E000D508D2 /* ViewController.m in Sources */,
-				D9802CEE14BD7A3B00D508D2 /* YmsGradientButton.m in Sources */,
 				D9E0A7EB14BD80E400079CE7 /* YourButton.m in Sources */,
-				D9F3150214BE88F800351ECC /* YmsCAGradientLayerButton.m in Sources */,
+				D99D9E0215C7938500A0C098 /* YmsCAGradientLayerButton.m in Sources */,
+				D99D9E0415C7938500A0C098 /* YmsGradientButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
