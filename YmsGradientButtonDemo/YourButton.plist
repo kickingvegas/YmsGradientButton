@@ -2,120 +2,136 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>normal</key>
+	<key>disabled</key>
 	<dict>
+		<key>borderColor</key>
+		<integer>4288256409</integer>
 		<key>borderWidth</key>
 		<integer>1</integer>
 		<key>cornerRadius</key>
 		<integer>3</integer>
-		<key>borderColor</key>
-		<integer>0</integer>
+		<key>gradients</key>
+		<array>
+			<dict>
+				<key>colors</key>
+				<array>
+					<integer>4294967295</integer>
+					<integer>4292072403</integer>
+				</array>
+				<key>endPoint</key>
+				<array>
+					<real>0.5</real>
+					<real>1.0</real>
+				</array>
+				<key>locations</key>
+				<array>
+					<real>0.02</real>
+					<real>0.3</real>
+				</array>
+				<key>startPoint</key>
+				<array>
+					<real>0.5</real>
+					<integer>0</integer>
+				</array>
+			</dict>
+		</array>
 		<key>textColor</key>
-		<integer>0xFF000000</integer>
-		<key>colors</key>
-		<array>
-			<integer>0x8F0000FF</integer>
-			<integer>0x7F00FFFF</integer>
-		</array>
-		<key>locations</key>
-		<array>
-			<string>0.1</string>
-			<string>0.7</string>
-		</array>
-		<key>startPoint</key>
-		<array>
-			<real>0.5</real>
-			<integer>0</integer>
-		</array>
-		<key>endPoint</key>
-		<array>
-			<real>0.5</real>
-			<real>1</real>
-		</array>
+		<integer>4286611584</integer>
 	</dict>
 	<key>highlighted</key>
 	<dict>
+		<key>borderColor</key>
+		<integer>4286611584</integer>
 		<key>borderWidth</key>
 		<integer>1</integer>
 		<key>cornerRadius</key>
 		<integer>3</integer>
-		<key>borderColor</key>
-		<integer>0xFF808080</integer>
+		<key>gradients</key>
+		<array>
+			<dict>
+				<key>colors</key>
+				<array>
+					<integer>2415853568</integer>
+					<integer>1895825152</integer>
+				</array>
+				<key>endPoint</key>
+				<array>
+					<real>0.5</real>
+					<real>1.0</real>
+				</array>
+				<key>locations</key>
+				<array>
+					<real>0.1</real>
+					<real>0.5</real>
+				</array>
+				<key>startPoint</key>
+				<array>
+					<real>0.5</real>
+					<integer>0</integer>
+				</array>
+			</dict>
+		</array>
 		<key>textColor</key>
-		<integer>0xFF2E8B57</integer>
-		<key>colors</key>
-		<array>
-			<integer>0x8FFF0000</integer>
-			<integer>0x70FFFF00</integer>
-		</array>
-		<key>locations</key>
-		<array>
-			<real>0.1</real>
-			<real>0.5</real>
-		</array>
-		<key>startPoint</key>
-		<array>
-			<real>0.5</real>
-			<integer>0</integer>
-		</array>
-		<key>endPoint</key>
-		<array>
-			<real>0.5</real>
-			<real>1</real>
-		</array>
+		<integer>4281240407</integer>
 	</dict>
-	<key>disabled</key>
+	<key>normal</key>
 	<dict>
+		<key>borderColor</key>
+		<integer>0</integer>
 		<key>borderWidth</key>
 		<integer>1</integer>
 		<key>cornerRadius</key>
 		<integer>3</integer>
-		<key>borderColor</key>
-		<integer>0xFF999999</integer>
+		<key>gradients</key>
+		<array>
+			<dict>
+				<key>colors</key>
+				<array>
+					<integer>2399142143</integer>
+					<integer>2130771967</integer>
+				</array>
+				<key>endPoint</key>
+				<array>
+					<real>0.5</real>
+					<real>1.0</real>
+				</array>
+				<key>locations</key>
+				<array>
+					<string>0.1</string>
+					<string>0.7</string>
+				</array>
+				<key>startPoint</key>
+				<array>
+					<real>0.5</real>
+					<integer>0</integer>
+				</array>
+			</dict>
+		</array>
 		<key>textColor</key>
-		<integer>0xFF808080</integer>
-		<key>colors</key>
-		<array>
-			<integer>0xFFFFFFFF</integer>
-			<integer>0xFFD3D3D3</integer>
-		</array>
-		<key>locations</key>
-		<array>
-			<real>0.02</real>
-			<real>0.3</real>
-		</array>
-		<key>startPoint</key>
-		<array>
-			<real>0.5</real>
-			<integer>0</integer>
-		</array>
-		<key>endPoint</key>
-		<array>
-			<real>0.5</real>
-			<real>1</real>
-		</array>
-
+		<integer>4278845610</integer>
 	</dict>
 	<key>shadow</key>
 	<dict>
-		<key>enable</key>
-		<true/>
-		<key>shadowOffset</key>
-		<array>
-			<real>0</real>
-			<real>2</real>
-		</array>
-		<key>shadowOpacity</key>
-		<real>1.5</real>
-		<key>shadowColor</key>
-		<integer>0xFF000000</integer>
-		<key>shadowRadius</key>
-		<real>2.5</real>
 		<key>anchorPoint</key>
 		<array>
 			<real>0.5</real>
 			<real>0.5</real>
 		</array>
+		<key>enable</key>
+		<true/>
+		<key>shadowColor</key>
+		<integer>4278190080</integer>
+		<key>shadowOffset</key>
+		<array>
+			<real>0.0</real>
+			<real>2.0</real>
+		</array>
+		<key>shadowOpacity</key>
+		<real>1.5</real>
+		<key>shadowRadius</key>
+		<real>2.5</real>
 	</dict>
+	<key>version</key>
+	<real>1.3</real>
 </dict>
 </plist>
