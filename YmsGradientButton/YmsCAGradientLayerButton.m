@@ -11,24 +11,23 @@
 @implementation YmsCAGradientLayerButton
 
 
-
-- (void)gradientImplementationForState:(UIControlState)aState 
-                            withConfig:(NSDictionary *)buttonConfig 
-                            forContext:(CGContextRef)context {
+- (void)gradientsImplementationForState:(UIControlState)aState
+                             withConfig:(NSDictionary *)buttonConfig
+                             forContext:(CGContextRef)context {
     
-    CAGradientLayer *gradientLayer = [self configureGradientForState:aState withConfig:buttonConfig];
-    [gradientLayer renderInContext:context];
+    NSArray *gradientLayers = [self configureGradientsForState:aState
+                                                    withConfig:buttonConfig];
+    
+    for (CAGradientLayer *gradientLayer in gradientLayers) {
+        [gradientLayer renderInContext:context];
+    }
     
 }
 
 
 
-- (CAGradientLayer *)configureGradientForState:(UIControlState)aState withConfig:(NSDictionary *)buttonConfig {
-    CAGradientLayer *gradientLayer = [[CAGradientLayer alloc] init];
-    
-    [gradientLayer setBounds:[self bounds]];
-    [gradientLayer setPosition:CGPointMake([self bounds].size.width/2,
-                                           [self bounds].size.height/2)];
+- (NSArray *)configureGradientsForState:(UIControlState)aState
+                             withConfig:(NSDictionary *)buttonConfig {
     
     NSString *stateName;
     
@@ -44,45 +43,70 @@
         stateName = @"disabled";
     }
     
-    NSArray *colorArray = (NSArray *)[(NSDictionary *)[buttonConfig objectForKey:stateName] objectForKey:@"colors"];
-    NSArray *locations = (NSArray *)[(NSDictionary *)[buttonConfig objectForKey:stateName] objectForKey:@"locations"];
-    NSArray *startPointArray = (NSArray *)[(NSDictionary *)[buttonConfig objectForKey:stateName] objectForKey:@"startPoint"];
-    NSArray *endPointArray = (NSArray *)[(NSDictionary *)[buttonConfig objectForKey:stateName] objectForKey:@"endPoint"];
-
-    NSNumber *textColor = (NSNumber *)[(NSDictionary *)[buttonConfig objectForKey:stateName] objectForKey:@"textColor"];
-    NSNumber *cornerRadius = (NSNumber *)[(NSDictionary *)[buttonConfig objectForKey:stateName] objectForKey:@"cornerRadius"];
-    NSNumber *borderColor = (NSNumber *)[(NSDictionary *)[buttonConfig objectForKey:stateName] objectForKey:@"borderColor"];
-    int borderColorValue = [borderColor integerValue];
-    NSNumber *borderWidth = (NSNumber *)[(NSDictionary *)[buttonConfig objectForKey:stateName] objectForKey:@"borderWidth"];
-    
-    NSMutableArray *colors = [[NSMutableArray alloc] init];
-    
-    for (NSNumber *num in colorArray) {
-        int n = [num integerValue];
-        [colors addObject:(id)[RGBCSS(n) CGColor]];
+    else if (aState == UIControlStateSelected) {
+        stateName = @"selected";
     }
     
-    [gradientLayer setColors:colors];
+    NSDictionary *stateDict = (NSDictionary *)[buttonConfig objectForKey:stateName];
+    NSArray *gradients = (NSArray *)[stateDict objectForKey:@"gradients"];
     
-    if ([locations count] > 0)
-        [gradientLayer setLocations:locations];
+    NSMutableArray *gradientLayers = [[NSMutableArray alloc] initWithCapacity:1];
+    
+    for (NSDictionary *gradient in gradients) {
+        CAGradientLayer *gradientLayer = [[CAGradientLayer alloc] init];
+        
+        [gradientLayer setBounds:[self bounds]];
+        [gradientLayer setPosition:CGPointMake([self bounds].size.width/2,
+                                               [self bounds].size.height/2)];
+        
+        NSArray *colorArray = (NSArray *)[gradient objectForKey:@"colors"];
+        NSArray *locations = (NSArray *)[gradient objectForKey:@"locations"];
+        NSArray *startPointArray = (NSArray *)[gradient objectForKey:@"startPoint"];
+        NSArray *endPointArray = (NSArray *)[gradient objectForKey:@"endPoint"];
+        
+        NSMutableArray *colors = [[NSMutableArray alloc] init];
+        
+        for (NSNumber *num in colorArray) {
+            int n = [num integerValue];
+            [colors addObject:(id)[RGBCSS(n) CGColor]];
+        }
+        
+        [gradientLayer setColors:colors];
+        
+        if ([locations count] > 0) {
+            [gradientLayer setLocations:locations];
+        }
+        
+        float startPointNormalizeX = [(NSNumber *)[startPointArray objectAtIndex:0] floatValue];
+        float startPointNormalizeY = [(NSNumber *)[startPointArray objectAtIndex:1] floatValue];
+        float endPointNormalizeX = [(NSNumber *)[endPointArray objectAtIndex:0] floatValue];
+        float endPointNormalizeY = [(NSNumber *)[endPointArray objectAtIndex:1] floatValue];
+        
+        gradientLayer.startPoint = CGPointMake(startPointNormalizeX, startPointNormalizeY);
+        gradientLayer.endPoint = CGPointMake(endPointNormalizeX, endPointNormalizeY);
+        
+        [gradientLayers addObject:gradientLayer];
+
+    }
+    
+    CAGradientLayer *lastGradientLayer = [gradientLayers lastObject];
+         
+  
+    NSNumber *textColor = (NSNumber *)[stateDict objectForKey:@"textColor"];
+    NSNumber *cornerRadius = (NSNumber *)[stateDict objectForKey:@"cornerRadius"];
+    NSNumber *borderColor = (NSNumber *)[stateDict objectForKey:@"borderColor"];
+    int borderColorValue = [borderColor integerValue];
+    NSNumber *borderWidth = (NSNumber *)[stateDict objectForKey:@"borderWidth"];
     
     int n = [textColor integerValue];
-    [self setTitleColor:RGBCSS(n) forState:aState];
-    gradientLayer.cornerRadius = [cornerRadius integerValue];
-    gradientLayer.masksToBounds = YES;
-    gradientLayer.borderColor = [RGBCSS(borderColorValue) CGColor];
-    gradientLayer.borderWidth = [borderWidth floatValue];
 
-    float startPointNormalizeX = [(NSNumber *)[startPointArray objectAtIndex:0] floatValue];
-    float startPointNormalizeY = [(NSNumber *)[startPointArray objectAtIndex:1] floatValue];
-    float endPointNormalizeX = [(NSNumber *)[endPointArray objectAtIndex:0] floatValue];
-    float endPointNormalizeY = [(NSNumber *)[endPointArray objectAtIndex:1] floatValue];
+    [self setTitleColor:RGBCSS(n) forState:aState];
+    lastGradientLayer.cornerRadius = [cornerRadius integerValue];
+    lastGradientLayer.masksToBounds = YES;
+    lastGradientLayer.borderColor = [RGBCSS(borderColorValue) CGColor];
+    lastGradientLayer.borderWidth = [borderWidth floatValue];
     
-    gradientLayer.startPoint = CGPointMake(startPointNormalizeX, startPointNormalizeY);
-    gradientLayer.endPoint = CGPointMake(endPointNormalizeX, endPointNormalizeY);
-    
-    return gradientLayer;
+    return [NSArray arrayWithArray:gradientLayers];
 }
  
  
