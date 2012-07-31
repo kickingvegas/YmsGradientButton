@@ -21,7 +21,7 @@
 				<key>endPoint</key>
 				<array>
 					<real>0.5</real>
-					<real>1.0</real>
+					<real>1</real>
 				</array>
 				<key>locations</key>
 				<array>
@@ -57,7 +57,7 @@
 				<key>endPoint</key>
 				<array>
 					<real>0.5</real>
-					<real>1.0</real>
+					<real>1</real>
 				</array>
 				<key>locations</key>
 				<array>
@@ -87,13 +87,13 @@
 			<dict>
 				<key>colors</key>
 				<array>
-					<integer>2399142143</integer>
-					<integer>2130771967</integer>
+					<integer>2399185663</integer>
+					<integer>2399185578</integer>
 				</array>
 				<key>endPoint</key>
 				<array>
 					<real>0.5</real>
-					<real>1.0</real>
+					<real>1</real>
 				</array>
 				<key>locations</key>
 				<array>
@@ -123,8 +123,8 @@
 		<integer>4278190080</integer>
 		<key>shadowOffset</key>
 		<array>
-			<real>0.0</real>
-			<real>2.0</real>
+			<real>0</real>
+			<real>2</real>
 		</array>
 		<key>shadowOpacity</key>
 		<real>1.5</real>
