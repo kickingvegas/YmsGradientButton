@@ -47,9 +47,17 @@
     
     if ([self validateConfiguration:buttonConfig]) {
         [self configureShadow:buttonConfig];
-        [self genGradientForState:UIControlStateNormal withConfig:buttonConfig];        
-        [self genGradientForState:UIControlStateHighlighted withConfig:buttonConfig];        
-        [self genGradientForState:UIControlStateDisabled withConfig:buttonConfig];        
+        [self genGradientsForState:UIControlStateNormal withConfig:buttonConfig];
+        
+        if ([buttonConfig objectForKey:@"highlighted"]) {
+            [self genGradientsForState:UIControlStateHighlighted withConfig:buttonConfig];
+        }
+            
+        if ([buttonConfig objectForKey:@"selected"]) {
+            [self genGradientsForState:UIControlStateSelected withConfig:buttonConfig];
+        }
+
+        [self genGradientsForState:UIControlStateDisabled withConfig:buttonConfig];
         
         [self.layer setNeedsDisplay];
     }
@@ -66,11 +74,13 @@
 }
 
 
-- (void)genGradientForState:(UIControlState)aState withConfig:(NSDictionary *)buttonConfig {
-    UIGraphicsBeginImageContext(self.bounds.size);
+- (void)genGradientsForState:(UIControlState)aState
+                  withConfig:(NSDictionary *)buttonConfig {
+    UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, 2.0); 
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    [self gradientImplementationForState:aState withConfig:buttonConfig forContext:context];
+    [self gradientsImplementationForState:aState
+                               withConfig:buttonConfig forContext:context];
     
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
@@ -80,9 +90,9 @@
 
 
 
-- (void)gradientImplementationForState:(UIControlState)aState 
-                            withConfig:(NSDictionary *)buttonConfig 
-                            forContext:(CGContextRef)context {
+- (void)gradientsImplementationForState:(UIControlState)aState
+                             withConfig:(NSDictionary *)buttonConfig
+                             forContext:(CGContextRef)context {
     
     /*
      * This method can be overridden if you want to implement your own gradient styling, 
@@ -99,14 +109,13 @@
         stateName = @"highlighted";
     }
 	
+    else if (aState == UIControlStateSelected) {
+        stateName = @"selected";
+    }
+    
     else if (aState == UIControlStateDisabled) {
         stateName = @"disabled";
     }
-    
-    NSArray *colorArray = (NSArray *)[(NSDictionary *)[buttonConfig objectForKey:stateName] objectForKey:@"colors"];
-    NSArray *locationsArray = (NSArray *)[(NSDictionary *)[buttonConfig objectForKey:stateName] objectForKey:@"locations"];
-    NSArray *startPointArray = (NSArray *)[(NSDictionary *)[buttonConfig objectForKey:stateName] objectForKey:@"startPoint"];
-    NSArray *endPointArray = (NSArray *)[(NSDictionary *)[buttonConfig objectForKey:stateName] objectForKey:@"endPoint"];
 
     NSNumber *textColor = (NSNumber *)[(NSDictionary *)[buttonConfig objectForKey:stateName] objectForKey:@"textColor"];
     NSNumber *cornerRadius = (NSNumber *)[(NSDictionary *)[buttonConfig objectForKey:stateName] objectForKey:@"cornerRadius"];
@@ -121,12 +130,13 @@
     int borderColorValue = [borderColor integerValue];
     float borderWidthValue = [borderWidth floatValue];
     
+    float roundBorderMargin = cornerRadiusValue > 0 ? 1.0 : 0.0;
 
     // Render path and set clipping region
-    UIBezierPath *bPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(cornerRadiusValue, 
-                                                                             cornerRadiusValue, 
-                                                                             self.bounds.size.width - (cornerRadiusValue * 2), 
-                                                                             self.bounds.size.height - (cornerRadiusValue * 2))
+    UIBezierPath *bPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(roundBorderMargin,
+                                                                             roundBorderMargin,
+                                                                             self.bounds.size.width - (roundBorderMargin * 2),
+                                                                             self.bounds.size.height - (roundBorderMargin * 2))
                                                      cornerRadius:cornerRadiusValue];
     
     [ARGBCSS(borderColorValue) setStroke];
@@ -138,9 +148,42 @@
     CGContextAddPath(context, bPath.CGPath);
     CGContextClip(context);
     
+    
     // Render Gradient
+    NSArray *gradients = (NSArray *)[(NSDictionary *)[buttonConfig objectForKey:stateName] objectForKey:@"gradients"];
+    CGColorSpaceRef rgbColorSpace;
+    rgbColorSpace = CGColorSpaceCreateDeviceRGB();
+    
+    
+    for (NSDictionary *gradient in gradients) {
+        NSArray *colorsArray = (NSArray *)[gradient objectForKey:@"colors"];
+        NSArray *locationsArray = (NSArray *)[gradient objectForKey:@"locations"];
+        NSArray *startPointArray = (NSArray *)[gradient objectForKey:@"startPoint"];
+        NSArray *endPointArray = (NSArray *)[gradient objectForKey:@"endPoint"];
+        [self contextDrawGradient:context
+                       colorSpace:rgbColorSpace
+                           colors:colorsArray
+                        locations:locationsArray
+                       startPoint:startPointArray
+                         endPoint:endPointArray];
+    }
+
+        
+    CGColorSpaceRelease(rgbColorSpace);
+    
+    [self addGraphicsForState:aState forContext:context withOffset:cornerRadiusValue];
+}
+
+
+- (void)contextDrawGradient:(CGContextRef)context
+                 colorSpace:(CGColorSpaceRef)rgbColorSpace
+                     colors:(NSArray *)colorsArray
+                  locations:(NSArray *)locationsArray
+                 startPoint:(NSArray *)startPointArray
+                   endPoint:(NSArray *)endPointArray {
+    
     CGGradientRef stateGradient;
-    CGColorSpaceRef rgbColorspace;
+    //CGColorSpaceRef rgbColorspace;
     
     CGFloat *locations = malloc(sizeof(CGFloat) * locationsArray.count);
     
@@ -154,10 +197,10 @@
     
     size_t numLocations = locationsArray.count;
     
-    CGFloat *components = malloc(sizeof(CGFloat) * colorArray.count * 4);
-
-    for (int i=0;  i < colorArray.count; i++) {
-        NSNumber *e = (NSNumber *)[colorArray objectAtIndex:i];
+    CGFloat *components = malloc(sizeof(CGFloat) * colorsArray.count * 4);
+    
+    for (int i=0;  i < colorsArray.count; i++) {
+        NSNumber *e = (NSNumber *)[colorsArray objectAtIndex:i];
         int rgb = [e integerValue];
         
         double r = (rgb >> 16 & 0xFF)/255.0;
@@ -170,10 +213,10 @@
         components[(i * 4) + 2] = b;
         components[(i * 4) + 3] = a;
     }
-
-
-    rgbColorspace = CGColorSpaceCreateDeviceRGB();
-    stateGradient = CGGradientCreateWithColorComponents(rgbColorspace, components, locations, numLocations);
+    
+    
+    //rgbColorspace = CGColorSpaceCreateDeviceRGB();
+    stateGradient = CGGradientCreateWithColorComponents(rgbColorSpace, components, locations, numLocations);
     
     CGRect currentBounds = self.bounds;
     
@@ -184,16 +227,14 @@
     
     CGPoint startPoint = CGPointMake(CGRectGetMaxX(currentBounds) * startPointNormalizeX, CGRectGetMaxY(currentBounds) * startPointNormalizeY);
     CGPoint endPoint = CGPointMake(CGRectGetMaxX(currentBounds) * endPointNormalizeX, CGRectGetMaxY(currentBounds) * endPointNormalizeY);
-    CGContextDrawLinearGradient(context, stateGradient, startPoint, endPoint, 0);
+    
+    CGContextDrawLinearGradient(context, stateGradient, startPoint, endPoint, kCGGradientDrawsBeforeStartLocation | kCGGradientDrawsAfterEndLocation);
+    
     
     CGGradientRelease(stateGradient);
-    CGColorSpaceRelease(rgbColorspace); 
-
+    
     free(locations);
     free(components);
-    
-    [self addGraphicsForState:aState forContext:context withOffset:cornerRadiusValue];
-
 }
 
 
@@ -205,6 +246,8 @@
 
 - (BOOL)validateConfiguration:(NSDictionary *)buttonConfig {
     BOOL result = YES;
+    
+    return result;
     
     NSArray *states = [[NSArray alloc] initWithObjects:@"normal", @"highlighted", @"disabled", nil];
     
