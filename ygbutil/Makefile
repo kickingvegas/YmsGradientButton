@@ -39,7 +39,7 @@ test_plist:
 	python ${EXEC}.py -i tests/version1_2_upgrade.js -o tests/version1_2_fromjson.plist convert
 
 clean_tests:
-	cd tests; rm -f *upgrade.plist *fromjson.plist *.js
+	cd tests; rm -f *upgrade.plist *fromjson.plist *.js *.backup
 
 
 
