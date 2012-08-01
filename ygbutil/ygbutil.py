@@ -151,8 +151,9 @@ class YmsGradientButtonConvert:
                     for i in range(len(gradient['colors'])):
                         gradient['colors'][i] = int(gradient['colors'][i][1:], 16)
 
-        if jsonDict.has_key('shadow'):
-            jsonDict['shadow']['shadowColor'] = int(jsonDict['shadow']['shadowColor'][1:], 16)
+
+                if jsonDict[key].has_key('shadow'):
+                    jsonDict[key]['shadow']['shadowColor'] = int(jsonDict[key]['shadow']['shadowColor'][1:], 16)
 
         outfileName = self.options['output']
         if outfileName is None:
@@ -187,8 +188,8 @@ class YmsGradientButtonConvert:
                     for i in range(len(gradient['colors'])):
                         gradient['colors'][i] = '#%x' % gradient['colors'][i]
 
-        if plistDict.has_key('shadow'):
-            plistDict['shadow']['shadowColor'] = '#%x' % plistDict['shadow']['shadowColor']
+                if plistDict[key].has_key('shadow'):
+                    plistDict[key]['shadow']['shadowColor'] = '#%x' % plistDict[key]['shadow']['shadowColor']
 
         outfileName = self.options['output']
         if outfileName is None:
