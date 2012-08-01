@@ -31,27 +31,26 @@ pre {
 
 </style>
 
+
 # YmsGradientButton Property List Schema
 
-### Changelist
+## Introduction
 
-* Initial Entry
+This document describes the schema for the property list used to configure the gradients and shadows of a YmsGradientButton for its different UIControlState values.
 
----
+## Schema Version
+ 
+**1.3**
 
-## Schemas
+## All Schemas
 
-| All Schemas | Description | 
+| Schemas | Description | 
 |:--|:--|
 |[YmsGradientButton]|Top-level schema for YmsGradientButton property list|
 |[ControlState]|ControlState schema|
 |[Gradient]|Gradient schema|
 |[Shadow]|Shadow schema|
 |[ARGB]|Alpha color schema|
-
-
-### Notes
-* Inherited properties listed in tables are italicized.
 
 ---
 
@@ -63,12 +62,11 @@ Top-level schema for YmsGradientButton property list.
 
 | Property | Type | Definition | Required |
 |:--|:--:|:--|:--:|
-|version|float|YMSGradientButton schema version | &bull; | 
+|version|float|YMSGradientButton schema version. Current value is **1.3** | &bull; | 
 |normal|[ControlState]| Configuration for UIControlStateNormal |&bull; | 
 |highlighted|[ControlState]| Configuration for UIControlStateHighlighted | | 
 |disabled|[ControlState]| Configuration for UIControlStateDisabled |&bull; | 
 |selected|[ControlState]| Configuration for UIControlStateSelected | | 
-
 
 ---
 
