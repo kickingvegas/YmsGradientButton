@@ -4,6 +4,27 @@
 <dict>
 	<key>disabled</key>
 	<dict>
+		<key>shadow</key>
+		<dict>
+			<key>anchorPoint</key>
+			<array>
+				<real>0.5</real>
+				<real>0.5</real>
+			</array>
+			<key>enable</key>
+			<true/>
+			<key>shadowColor</key>
+			<integer>4278190080</integer>
+			<key>shadowOffset</key>
+			<array>
+				<real>0</real>
+				<real>2</real>
+			</array>
+			<key>shadowOpacity</key>
+			<real>1.5</real>
+			<key>shadowRadius</key>
+			<real>2.5</real>
+		</dict>
 		<key>borderColor</key>
 		<integer>4288256409</integer>
 		<key>borderWidth</key>
@@ -33,6 +54,8 @@
 					<real>0.5</real>
 					<integer>0</integer>
 				</array>
+				<key>type</key>
+				<string>linear</string>
 			</dict>
 		</array>
 		<key>textColor</key>
@@ -40,6 +63,27 @@
 	</dict>
 	<key>highlighted</key>
 	<dict>
+		<key>shadow</key>
+		<dict>
+			<key>anchorPoint</key>
+			<array>
+				<real>0.5</real>
+				<real>0.5</real>
+			</array>
+			<key>enable</key>
+			<true/>
+			<key>shadowColor</key>
+			<integer>4278190080</integer>
+			<key>shadowOffset</key>
+			<array>
+				<real>0</real>
+				<real>2</real>
+			</array>
+			<key>shadowOpacity</key>
+			<real>1.5</real>
+			<key>shadowRadius</key>
+			<real>2.5</real>
+		</dict>
 		<key>borderColor</key>
 		<integer>4286611584</integer>
 		<key>borderWidth</key>
@@ -69,6 +113,8 @@
 					<real>0.5</real>
 					<integer>0</integer>
 				</array>
+				<key>type</key>
+				<string>linear</string>
 			</dict>
 		</array>
 		<key>textColor</key>
@@ -76,6 +122,27 @@
 	</dict>
 	<key>normal</key>
 	<dict>
+		<key>shadow</key>
+		<dict>
+			<key>anchorPoint</key>
+			<array>
+				<real>0.5</real>
+				<real>0.5</real>
+			</array>
+			<key>enable</key>
+			<true/>
+			<key>shadowColor</key>
+			<integer>4278190080</integer>
+			<key>shadowOffset</key>
+			<array>
+				<real>0</real>
+				<real>2</real>
+			</array>
+			<key>shadowOpacity</key>
+			<real>1.5</real>
+			<key>shadowRadius</key>
+			<real>2.5</real>
+		</dict>
 		<key>borderColor</key>
 		<integer>0</integer>
 		<key>borderWidth</key>
@@ -105,31 +172,12 @@
 					<real>0.5</real>
 					<integer>0</integer>
 				</array>
+				<key>type</key>
+				<string>linear</string>
 			</dict>
 		</array>
 		<key>textColor</key>
 		<integer>4278845610</integer>
-	</dict>
-	<key>shadow</key>
-	<dict>
-		<key>anchorPoint</key>
-		<array>
-			<real>0.5</real>
-			<real>0.5</real>
-		</array>
-		<key>enable</key>
-		<true/>
-		<key>shadowColor</key>
-		<integer>4278190080</integer>
-		<key>shadowOffset</key>
-		<array>
-			<real>0</real>
-			<real>2</real>
-		</array>
-		<key>shadowOpacity</key>
-		<real>1.5</real>
-		<key>shadowRadius</key>
-		<real>2.5</real>
 	</dict>
 	<key>version</key>
 	<real>1.3</real>
