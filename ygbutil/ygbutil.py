@@ -130,10 +130,19 @@ class YmsGradientButtonConvert:
     def convertJs2Plist(self):
         infileName = self.options['input']
         infile = open(infileName, 'r')
-        jsonDict = json.load(infile)
+
+        try:
+            jsonDict = json.load(infile)
+        except ValueError as e:
+            infile.close()
+            sys.stderr.write("ERROR: can not process '%s': JSON syntax violation.\n" % infileName)
+            sys.stderr.write("ERROR: %s\n" % e.args[0])
+            sys.stderr.write("Exiting...\n")
+            sys.exit(1)
+        
         infile.close()
 
-        for key in ('normal', 'highlighted', 'disabled'):
+        for key in ('normal', 'highlighted', 'disabled', 'selected'):
             if jsonDict.has_key(key):
                 for property in ('textColor', 'borderColor'):
                     jsonDict[key][property] = int(jsonDict[key][property][1:], 16)
@@ -157,13 +166,19 @@ class YmsGradientButtonConvert:
 
     def convertPlist2Json(self):
         infileName = self.options['input']
-        plistDict = plistlib.readPlist(infileName)
+        try:
+            plistDict = plistlib.readPlist(infileName)
+        except ValueError as e:
+            sys.stderr.write("ERROR: can not process '%s' due to %s\n" % (infileName, e.args[0]))
+            sys.stderr.write("Please convert base-16 values to base-10 values in '%s'\n" % infileName)
+            sys.stderr.write("Exiting...\n")
+            sys.exit(1)
 
         if not plistDict.has_key('version'):
             sys.stderr.write('Error: Please upgrade this file to convert to JSON\n')
             sys.exit(1)
 
-        for key in ('normal', 'highlighted', 'disabled'):
+        for key in ('normal', 'highlighted', 'disabled', 'selected'):
             if plistDict.has_key(key):
                 for property in ('textColor', 'borderColor'):
                     plistDict[key][property] = '#%x' % plistDict[key][property]
@@ -189,25 +204,50 @@ class YmsGradientButtonConvert:
 
     def upgradePlist(self):
         infileName = self.options['input']
-        plistDict = plistlib.readPlist(infileName)
+
+        try:
+            plistDict = plistlib.readPlist(infileName)
+        except ValueError as e:
+            sys.stderr.write("ERROR: can not process '%s' due to %s\n" % (infileName, e.args[0]))
+            sys.stderr.write("Please convert base-16 values to base-10 values in '%s'\n" % infileName)
+            sys.stderr.write("Exiting...\n")
+            sys.exit(1)
+        
 
         if plistDict.has_key('version'):
             if str(plistDict['version']) == self.plistVersion:
                 sys.stderr.write('Plist is already at current version %s. Exiting...\n' % self.plistVersion)
                 sys.exit(1)
-
-        for key in ('normal', 'highlighted', 'disabled'):
-            if plistDict.has_key(key):
-                gradients = []
-                tempDict = {}
-                for property in ('locations', 'colors', 'startPoint', 'endPoint'):
-                    tempDict[property] = plistDict[key][property][:]
-                    del(plistDict[key][property])
-                gradients.append(tempDict)
-                plistDict[key]['gradients'] = gradients
-        
-        if (not plistDict.has_key('version')):
+        else:
             plistDict['version'] = 1.3
+
+            if plistDict['normal'].has_key('gradients'):
+                # support for version 1.2
+                for key in ('normal', 'highlighted', 'disabled', 'selected'):
+                    if plistDict.has_key(key):                
+                        for gradient in plistDict[key].gradients:
+                            gradient['type'] = 'linear'
+
+            else:
+                # support for version 1.1
+                for key in ('normal', 'highlighted', 'disabled', 'selected'):
+                    if plistDict.has_key(key):
+                        gradients = []
+                        tempDict = {}
+                        tempDict['type'] = 'linear'
+                        for property in ('locations', 'colors', 'startPoint', 'endPoint'):
+                            tempDict[property] = plistDict[key][property][:]
+                            del(plistDict[key][property])
+                        gradients.append(tempDict)
+                        plistDict[key]['gradients'] = gradients
+
+
+            if plistDict.has_key('shadow'):
+                for key in ('normal', 'highlighted', 'disabled', 'selected'):
+                    if plistDict.has_key(key):
+                        plistDict[key]['shadow'] = dict.copy(plistDict['shadow'])
+
+                del(plistDict['shadow'])
 
         outfileName = self.options['output']
         if outfileName is None:
@@ -218,7 +258,6 @@ class YmsGradientButtonConvert:
         
         plistlib.writePlist(plistDict, outfileName)
         
-
                 
 if __name__ == '__main__':
 
