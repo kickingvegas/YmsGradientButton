@@ -24,12 +24,15 @@
 @interface YmsGradientButton : UIButton
 
 @property (nonatomic, strong) NSString *resourceName;
+@property (nonatomic, strong) NSMutableDictionary *shadowConfig;
 
 
 - (void)genGradientsForState:(UIControlState)aState
                   withConfig:(NSDictionary *)buttonConfig;
 
 - (void)configureShadow:(NSDictionary *)buttonConfig;
+
+- (void)renderShadow:(NSDictionary *)shadowDict;
 
 - (BOOL)validateConfiguration:(NSDictionary *)buttonConfig;
 

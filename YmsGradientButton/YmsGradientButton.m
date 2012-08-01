@@ -21,6 +21,7 @@
 
 @implementation YmsGradientButton
 @synthesize resourceName;
+@synthesize shadowConfig;
 
 
 - (void)awakeFromNib {
@@ -28,13 +29,21 @@
     [self renderGradients];
 }
 
+
 - (void)renderGradients {
-    self.layer.masksToBounds = NO;
     
+    [self addObserver:self forKeyPath:@"highlighted" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+    [self addObserver:self forKeyPath:@"selected" options:NSKeyValueObservingOptionNew context:NULL];
+    [self addObserver:self forKeyPath:@"enabled" options:NSKeyValueObservingOptionNew context:NULL];
+
+    
+    self.layer.masksToBounds = NO;
+
     if (self.resourceName == nil) {
         self.resourceName = NSStringFromClass([self class]);
     }
     
+       
     NSString *path = [[NSBundle mainBundle] pathForResource:self.resourceName ofType:@"plist"];
     
     if (path == nil) {
@@ -65,6 +74,56 @@
         [NSException raise:@"Invalid YmsGradientButton Configuration" 
                     format:@"Please correct '%@.plist' to resume operation.", self.resourceName];
     }
+    
+    NSDictionary *shadowDict;
+    if (!self.enabled) {
+        shadowDict = (NSDictionary *)[self.shadowConfig objectForKey:@"disabled"];
+    }
+    else {
+        shadowDict = (NSDictionary *)[self.shadowConfig objectForKey:@"normal"];
+    }
+    
+    [self renderShadow:shadowDict];
+
+}
+
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    
+    if ([keyPath isEqualToString:@"highlighted"]) {
+        if (self.highlighted) {
+            if ([[change valueForKey:NSKeyValueChangeOldKey] boolValue] == NO) {
+                NSDictionary *shadowDict = (NSDictionary *)[self.shadowConfig objectForKey:keyPath];
+                [self renderShadow:shadowDict];
+            }
+        }
+        else {
+            NSDictionary *shadowDict = (NSDictionary *)[self.shadowConfig objectForKey:@"normal"];
+            [self renderShadow:shadowDict];
+
+        }
+    }
+    
+    else if ([keyPath isEqualToString:@"selected"]) {
+        if (self.selected) {
+            NSDictionary *shadowDict = (NSDictionary *)[self.shadowConfig objectForKey:@"selected"];
+            [self renderShadow:shadowDict];
+        }
+
+    }
+    
+    else if ([keyPath isEqualToString:@"enabled"]) {
+        if (self.enabled) {
+            NSDictionary *shadowDict = (NSDictionary *)[self.shadowConfig objectForKey:@"normal"];
+            [self renderShadow:shadowDict];
+
+        }
+        else {
+            NSDictionary *shadowDict = (NSDictionary *)[self.shadowConfig objectForKey:@"disabled"];
+            [self renderShadow:shadowDict];
+
+        }
+    }
 }
 
 
@@ -88,6 +147,36 @@
     [self setBackgroundImage:image forState:aState];
 }
 
+
+- (void)renderShadow:(NSDictionary *)shadowDict {
+    if (shadowDict != nil) {
+        NSNumber *enable = (NSNumber *)[shadowDict objectForKey:@"enable"];
+        
+        if ([enable boolValue]) {
+            NSArray *shadowOffset = (NSArray *)[shadowDict objectForKey:@"shadowOffset"];
+            NSArray *anchorPoint = (NSArray *)[shadowDict objectForKey:@"anchorPoint"];
+            NSNumber *shadowOpacity = (NSNumber *)[shadowDict objectForKey:@"shadowOpacity"];
+            NSNumber *shadowColor = (NSNumber *)[shadowDict objectForKey:@"shadowColor"];
+            NSNumber *shadowRadius = (NSNumber *)[shadowDict objectForKey:@"shadowRadius"];
+            
+            float x, y;
+            int c = [shadowColor integerValue];
+            
+            x = [(NSNumber *)[shadowOffset objectAtIndex:0] floatValue];
+            y = [(NSNumber *)[shadowOffset objectAtIndex:1] floatValue];
+            self.layer.shadowOffset = CGSizeMake(x, y);
+            
+            x = [(NSNumber *)[anchorPoint objectAtIndex:0] floatValue];
+            y = [(NSNumber *)[anchorPoint objectAtIndex:1] floatValue];
+            self.layer.anchorPoint = CGPointMake(x, y);
+            
+            self.layer.shadowOpacity = [shadowOpacity floatValue];
+            self.layer.shadowRadius = [shadowRadius floatValue];
+            self.layer.shadowColor = [ARGBCSS(c) CGColor];
+        }
+    }
+    
+}
 
 
 - (void)gradientsImplementationForState:(UIControlState)aState
@@ -116,6 +205,12 @@
     else if (aState == UIControlStateDisabled) {
         stateName = @"disabled";
     }
+    
+    /*
+    NSDictionary *shadowDict = (NSDictionary *)[self.shadowConfig objectForKey:stateName];
+    [self renderShadow:shadowDict];
+     */
+    
 
     NSNumber *textColor = (NSNumber *)[(NSDictionary *)[buttonConfig objectForKey:stateName] objectForKey:@"textColor"];
     NSNumber *cornerRadius = (NSNumber *)[(NSDictionary *)[buttonConfig objectForKey:stateName] objectForKey:@"cornerRadius"];
@@ -388,8 +483,6 @@
                                 [gradientKeys addObject:@"endCenter"];
                                 [gradientKeys addObject:@"endRadius"];
                             }
-
-                            
                             
                             for (NSString *gradientKey in gradientKeys) {
                                 id gv = [gradient objectForKey:gradientKey];
@@ -412,7 +505,6 @@
                                     }
                                 }
                             }
-                            
 
                             NSArray *colorArray = (NSArray *)[gradient objectForKey:@"colors"];
                             NSArray *locations = (NSArray *)[gradient objectForKey:@"locations"];
@@ -421,7 +513,6 @@
                                 NSLog(@"[ERROR: %@.plist]: %@.%@[%d].colors.count != locations.count.", self.resourceName, stateName, stateKey, index);
                                 result = result & NO;
                             }
-                            
                             index++;
                         }
                     }
@@ -472,37 +563,33 @@
 - (void)configureShadow:(NSDictionary *)buttonConfig {
     // Note that self.layer.masksToBounds should be set NO in order for the shadow to render.
     
-    NSDictionary *shadow = (NSDictionary *)[buttonConfig objectForKey:@"shadow"];
+    if (self.shadowConfig == nil) {
+        self.shadowConfig = [[NSMutableDictionary alloc] initWithCapacity:4];
+    }
     
-    if (shadow != nil) {
-        NSNumber *enable = (NSNumber *)[shadow objectForKey:@"enable"];
-        
-        if ([enable boolValue]) {
-            NSArray *shadowOffset = (NSArray *)[shadow objectForKey:@"shadowOffset"];
-            NSArray *anchorPoint = (NSArray *)[shadow objectForKey:@"anchorPoint"];
-            NSNumber *shadowOpacity = (NSNumber *)[shadow objectForKey:@"shadowOpacity"];
-            NSNumber *shadowColor = (NSNumber *)[shadow objectForKey:@"shadowColor"];
-            NSNumber *shadowRadius = (NSNumber *)[shadow objectForKey:@"shadowRadius"];
-            
-            
-            float x, y;
-            int c = [shadowColor integerValue];
-            
-            x = [(NSNumber *)[shadowOffset objectAtIndex:0] floatValue];
-            y = [(NSNumber *)[shadowOffset objectAtIndex:1] floatValue];
-            self.layer.shadowOffset = CGSizeMake(x, y);
-            
-            x = [(NSNumber *)[anchorPoint objectAtIndex:0] floatValue];
-            y = [(NSNumber *)[anchorPoint objectAtIndex:1] floatValue];
-            self.layer.anchorPoint = CGPointMake(x, y);
-            
-            self.layer.shadowOpacity = [shadowOpacity floatValue];
-            self.layer.shadowRadius = [shadowRadius floatValue];
-            self.layer.shadowColor = [ARGBCSS(c) CGColor];
+    NSArray *stateKeys = [NSArray arrayWithObjects:@"normal"
+                          , @"highlighted"
+                          , @"selected"
+                          , @"disabled"
+                          , nil];
+    
+
+    for (NSString *stateKey in stateKeys) {
+        NSDictionary *stateDict = (NSDictionary *)[buttonConfig objectForKey:stateKey];
+        if (stateDict != nil) {
+            NSDictionary *shadowDict = (NSDictionary *)[stateDict objectForKey:@"shadow"];
+            if (shadowDict != nil) {
+                [self.shadowConfig setObject:[[NSDictionary alloc] initWithDictionary:shadowDict copyItems:YES]
+                                      forKey:stateKey];
+            }
         }
     }
 }
 
-
+- (void)dealloc {
+    [self removeObserver:self forKeyPath:@"highlighted"];
+    [self removeObserver:self forKeyPath:@"selected"];
+    [self removeObserver:self forKeyPath:@"enabled"];
+}
 
 @end
