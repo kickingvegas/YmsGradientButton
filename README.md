@@ -6,7 +6,7 @@ iOS UIButton subclass featuring property list (plist) configured bitmap-free gra
 
 **YmsGradientButton** is a subclass of UIButton which supports the rendering of a gradient background and shadow with respect its control state (`UIControlState`). Supported gradient types are linear and radial.
 
-[](https://raw.github.com/kickingvegas/YmsGradientButton/master/Documents/images/screenshot.png)
+![](https://raw.github.com/kickingvegas/YmsGradientButton/master/Documents/images/screenshot.png)
 
 
 ## Change List - Many of them, all for the better.
