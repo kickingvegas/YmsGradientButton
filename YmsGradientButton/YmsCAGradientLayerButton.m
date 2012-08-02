@@ -53,6 +53,13 @@
     NSMutableArray *gradientLayers = [[NSMutableArray alloc] initWithCapacity:1];
     
     for (NSDictionary *gradient in gradients) {
+        NSString *gradientType = (NSString *)[gradient objectForKey:@"type"];
+        
+        if (![gradientType isEqualToString:@"linear"]) {
+            NSLog(@"WARNING: radial gradients are not supported for CAGradientLayer. Skipping this gradient.");
+            continue;
+        }
+
         CAGradientLayer *gradientLayer = [[CAGradientLayer alloc] init];
         
         [gradientLayer setBounds:[self bounds]];
