@@ -14,7 +14,7 @@
 			<key>enable</key>
 			<true/>
 			<key>shadowColor</key>
-			<integer>2583625728</integer>
+			<integer>1426063360</integer>
 			<key>shadowOffset</key>
 			<array>
 				<real>4</real>
@@ -148,7 +148,7 @@
 			<real>2.5</real>
 		</dict>
 		<key>borderColor</key>
-		<integer>4291611852</integer>
+		<integer>4280427042</integer>
 		<key>borderWidth</key>
 		<real>2.5</real>
 		<key>cornerRadius</key>
