@@ -14,7 +14,7 @@ iOS UIButton subclass featuring property list (plist) configured bitmap-free gra
 * Added support to define multiple gradients to render per `UIControlState`.
 * Added support to define shadow per `UIControlState`.
 * Added support to render a radial gradient.
-* YmsGradientButton property list schema more robustly [specified](Documents/Specifications/YmsGradientButtonSchema.html).
+* YmsGradientButton property list schema more robustly [specified](http://kickingvegas.github.com/YmsGradientButton/YmsGradientButtonSchema.html).
 * Added version to YmsGradientButton plist specification. (Current value: 1.3)
 * *New* --  `ygbutil` utility with the following features:
     - Upgrade previous plist file to current version
@@ -37,7 +37,7 @@ iOS UIButton subclass featuring property list (plist) configured bitmap-free gra
   name to create your own custom button.
 * `YmsGradientButton` can also be instantiated programmatically.
 
-[YmsGradient Button Property List Specification v1.3](Documents/Specifications/YmsGradientButtonSchema.html)
+[YmsGradient Button Property List Specification v1.3](http://kickingvegas.github.com/YmsGradientButton/YmsGradientButtonSchema.html)
 
 
 ## Upgrading plist files
